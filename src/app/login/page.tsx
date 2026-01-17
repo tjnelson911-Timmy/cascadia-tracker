@@ -118,8 +118,8 @@ export default async function LoginPage() {
           </p>
 
           {/* Admin Login Link */}
-          <p className="text-center text-xs text-blue-300/50 mt-4">
-            <a href="/admin/login" className="hover:text-blue-200 transition-colors">
+          <p className="text-center text-sm text-blue-200 mt-6">
+            <a href="/admin/login" className="underline hover:text-white transition-colors">
               Admin Login
             </a>
           </p>
