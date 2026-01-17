@@ -24,13 +24,15 @@ export default async function DashboardPage() {
   // Check if they need to change password
   const { data: profile } = await supabase
     .from('profiles')
-    .select('full_name, must_change_password')
+    .select('full_name, must_change_password, is_admin')
     .eq('id', user.id)
     .single()
 
   if (profile?.must_change_password) {
     redirect('/change-password')
   }
+
+  const isAdmin = profile?.is_admin || false
 
   // Get all facilities with extended fields for filtering
   const { data: allFacilities } = await supabase
@@ -192,6 +194,14 @@ export default async function DashboardPage() {
               <p className="text-xs sm:text-sm text-blue-100 hidden sm:block italic font-light">&ldquo;Leadership isn&apos;t about being perfect. It&apos;s about being present.&rdquo;</p>
             </div>
             <div className="flex items-center gap-2 sm:gap-4">
+              {isAdmin && (
+                <Link
+                  href="/admin"
+                  className="px-3 py-2 text-sm font-medium text-amber-200 hover:text-amber-100 hover:bg-white/10 rounded-lg transition-colors hidden sm:block"
+                >
+                  Admin
+                </Link>
+              )}
               <Link
                 href="/admin/users"
                 className="px-3 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors hidden sm:block"
@@ -210,6 +220,14 @@ export default async function DashboardPage() {
           </div>
           {/* Mobile Nav */}
           <div className="flex gap-2 mt-3 sm:hidden overflow-x-auto pb-1">
+            {isAdmin && (
+              <Link
+                href="/admin"
+                className="px-3 py-1.5 text-sm font-medium text-amber-200 bg-amber-500/30 rounded-lg whitespace-nowrap"
+              >
+                Admin
+              </Link>
+            )}
             <Link
               href="/admin/users"
               className="px-3 py-1.5 text-sm font-medium text-white bg-white/20 rounded-lg whitespace-nowrap"

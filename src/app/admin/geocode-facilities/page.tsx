@@ -20,6 +20,17 @@ export default async function GeocodeFacilitiesPage() {
     redirect('/login')
   }
 
+  // Check if user is admin
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('is_admin')
+    .eq('id', user.id)
+    .single()
+
+  if (!profile?.is_admin) {
+    redirect('/dashboard')
+  }
+
   // Get facilities missing coordinates
   const { data: facilitiesNeedingGeocode, count: missingCount } = await supabase
     .from('facilities')

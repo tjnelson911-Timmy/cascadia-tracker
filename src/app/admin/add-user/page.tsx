@@ -1,20 +1,15 @@
 /**
- * Facility Import Page
+ * Add User Page
  *
- * WHY THIS FILE?
- * Allows importing facilities from a CSV file.
- * CSV format expected:
- * name,address,facility_type,latitude,longitude
- *
- * Facility types must be: SNF, AL, IL, or Hospice
+ * Admin page to create new user accounts.
  */
 
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
-import ImportForm from './import-form'
 import Link from 'next/link'
+import AddUserForm from './add-user-form'
 
-export default async function ImportFacilitiesPage() {
+export default async function AddUserPage() {
   const supabase = await createClient()
 
   // Check if user is logged in
@@ -35,11 +30,6 @@ export default async function ImportFacilitiesPage() {
     redirect('/dashboard')
   }
 
-  // Get current facility count
-  const { count: facilityCount } = await supabase
-    .from('facilities')
-    .select('*', { count: 'exact', head: true })
-
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Header */}
@@ -50,10 +40,10 @@ export default async function ImportFacilitiesPage() {
             <p className="text-sm text-slate-500">Leadership Presence Tracker</p>
           </div>
           <Link
-            href="/dashboard"
+            href="/admin"
             className="px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors"
           >
-            Back to Dashboard
+            Back to Admin
           </Link>
         </div>
       </header>
@@ -62,24 +52,13 @@ export default async function ImportFacilitiesPage() {
       <main className="max-w-2xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <div className="bg-white rounded-xl shadow-lg p-8">
           <h2 className="text-2xl font-semibold text-slate-800 mb-2">
-            Import Facilities
+            Add New User
           </h2>
           <p className="text-slate-500 mb-6">
-            Upload an Excel or CSV file with your facility data. Current count: {facilityCount ?? 0} facilities.
+            Create a new team member account. They will use their name to log in.
           </p>
 
-          {/* File Format Info */}
-          <div className="bg-slate-50 rounded-lg p-4 mb-6">
-            <h3 className="font-medium text-slate-700 mb-2">Expected Columns:</h3>
-            <p className="text-sm text-slate-600">
-              Facility Name, Type, Address, City, State, Zip, County, Company, Team
-            </p>
-            <p className="text-xs text-slate-400 mt-2">
-              Accepts .xlsx, .xls, or .csv files. First row should be headers.
-            </p>
-          </div>
-
-          <ImportForm />
+          <AddUserForm />
         </div>
       </main>
     </div>

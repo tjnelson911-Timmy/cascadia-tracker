@@ -19,6 +19,17 @@ export default async function AddFacilityPage() {
     redirect('/login')
   }
 
+  // Check if user is admin
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('is_admin')
+    .eq('id', user.id)
+    .single()
+
+  if (!profile?.is_admin) {
+    redirect('/dashboard')
+  }
+
   // Get existing facility types for dropdown
   const { data: facilities } = await supabase
     .from('facilities')
