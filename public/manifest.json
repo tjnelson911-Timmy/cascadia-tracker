@@ -1,7 +1,7 @@
 {
-  "name": "Cascadia Leadership Presence Tracker",
-  "short_name": "Cascadia",
-  "description": "Track facility visits for Cascadia leadership team",
+  "name": "Leadership Presence Tracker",
+  "short_name": "Leadership",
+  "description": "Leadership isn't about being perfect. It's about being present.",
   "start_url": "/dashboard",
   "display": "standalone",
   "background_color": "#f8fafc",

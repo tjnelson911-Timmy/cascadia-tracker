@@ -9,6 +9,7 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import VisitsList from './visits-list'
+import QuoteBanner from '@/components/quote-banner'
 
 export default async function VisitsPage() {
   const supabase = await createClient()
@@ -71,25 +72,51 @@ export default async function VisitsPage() {
   )]
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <div>
-            <h1 className="text-2xl font-bold text-slate-800">Cascadia</h1>
-            <p className="text-sm text-slate-500">Leadership Presence Tracker</p>
+    <div className="min-h-screen bg-slate-100">
+      {/* Header - matching dashboard */}
+      <header className="bg-gradient-to-r from-blue-600 to-blue-700 shadow-lg sticky top-0 z-40">
+        <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center">
+            <div>
+              <h1 className="text-2xl font-bold text-white">Leadership Presence Tracker</h1>
+              <p className="text-sm text-blue-100 hidden sm:block italic font-light">&ldquo;Leadership isn&apos;t about being perfect. It&apos;s about being present.&rdquo;</p>
+            </div>
+            <div className="flex items-center gap-2 sm:gap-4">
+              <Link
+                href="/admin/users"
+                className="px-3 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors hidden sm:block"
+              >
+                Team Visits
+              </Link>
+              <Link
+                href="/dashboard"
+                className="px-3 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+              >
+                Dashboard
+              </Link>
+              <span className="text-white/80 hidden md:block">{profile?.full_name}</span>
+            </div>
           </div>
-          <div className="flex items-center gap-4">
-            <span className="text-slate-600 hidden sm:inline">{profile?.full_name}</span>
+          {/* Mobile Nav */}
+          <div className="flex gap-2 mt-3 sm:hidden overflow-x-auto pb-1">
+            <Link
+              href="/admin/users"
+              className="px-3 py-1.5 text-sm font-medium text-white bg-white/20 rounded-lg whitespace-nowrap"
+            >
+              Team Visits
+            </Link>
             <Link
               href="/dashboard"
-              className="px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors"
+              className="px-3 py-1.5 text-sm font-medium text-white bg-white/20 rounded-lg whitespace-nowrap"
             >
               Dashboard
             </Link>
           </div>
         </div>
       </header>
+
+      {/* Quote Banner */}
+      <QuoteBanner count={3} />
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">

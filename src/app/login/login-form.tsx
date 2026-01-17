@@ -101,12 +101,12 @@ export default function LoginForm({ users }: LoginFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
       {/* User Dropdown */}
       <div>
         <label
           htmlFor="user"
-          className="block text-sm font-medium text-slate-700 mb-2"
+          className="block text-sm font-medium text-slate-700 mb-1.5 sm:mb-2"
         >
           Your Name
         </label>
@@ -114,7 +114,7 @@ export default function LoginForm({ users }: LoginFormProps) {
           id="user"
           value={selectedUserId}
           onChange={(e) => setSelectedUserId(e.target.value)}
-          className="w-full px-4 py-3 rounded-lg border border-slate-300 bg-white text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+          className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-slate-300 bg-white text-slate-800 text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
           required
         >
           <option value="">Select your name...</option>
@@ -130,7 +130,7 @@ export default function LoginForm({ users }: LoginFormProps) {
       <div>
         <label
           htmlFor="password"
-          className="block text-sm font-medium text-slate-700 mb-2"
+          className="block text-sm font-medium text-slate-700 mb-1.5 sm:mb-2"
         >
           Password
         </label>
@@ -141,13 +141,13 @@ export default function LoginForm({ users }: LoginFormProps) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password"
-            className="w-full px-4 py-3 pr-12 rounded-lg border border-slate-300 text-slate-800 placeholder-slate-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+            className="w-full px-3 sm:px-4 py-2.5 sm:py-3 pr-12 rounded-lg border border-slate-300 text-slate-800 text-base placeholder-slate-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             required
           />
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1"
           >
             {showPassword ? (
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -174,7 +174,7 @@ export default function LoginForm({ users }: LoginFormProps) {
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 sm:py-3 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-base"
       >
         {isLoading ? (
           <span className="flex items-center justify-center gap-2">

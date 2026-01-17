@@ -2,8 +2,10 @@
  * Login Page
  *
  * WHY THIS FILE?
- * This is the main login page for Cascadia Leadership Presence Tracker.
+ * This is the main login page for Leadership Presence Tracker.
  * It displays:
+ * - Leadership quotes scattered around the page
+ * - A featured quote prominently displayed
  * - A dropdown of all users (fetched from database)
  * - A password input field
  * - A login button
@@ -18,6 +20,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import LoginForm from './login-form'
+import { getFeaturedQuote } from '@/lib/quotes'
 
 export default async function LoginPage() {
   const supabase = await createClient()
@@ -49,32 +52,67 @@ export default async function LoginPage() {
     console.error('Error fetching profiles:', error)
   }
 
+  const featuredQuote = getFeaturedQuote()
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        {/* Logo/Branding */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-slate-800 tracking-tight">
-            Cascadia
-          </h1>
-          <p className="text-slate-500 mt-2">
-            Leadership Presence Tracker
+    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-300 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-indigo-400 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+      </div>
+
+      {/* Cascadia Logo Watermark */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+        <div className="text-center opacity-[0.04]">
+          <p className="text-[70px] sm:text-[120px] md:text-[180px] lg:text-[220px] font-black text-white tracking-tight leading-none">
+            CASCADIA
+          </p>
+          <p className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-light text-white tracking-widest mt-1 sm:mt-2">
+            CascadiaHC.com
+          </p>
+        </div>
+      </div>
+
+
+      {/* Main Content */}
+      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-6 sm:py-8">
+        {/* Featured Quote - Big and Prominent */}
+        {featuredQuote && (
+          <div className="max-w-3xl mx-auto text-center mb-6 sm:mb-10 px-2">
+            <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-white leading-snug sm:leading-relaxed italic drop-shadow-lg">
+              &ldquo;{featuredQuote.text}&rdquo;
+            </p>
+          </div>
+        )}
+
+        <div className="w-full max-w-md">
+          {/* Logo/Branding */}
+          <div className="text-center mb-6 sm:mb-8">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight drop-shadow-md leading-tight">
+              Leadership Presence Tracker
+            </h1>
+            <p className="text-blue-200 mt-2 sm:mt-3 italic font-light text-sm sm:text-lg">
+              &ldquo;Leaders show up whether they feel like it or not.&rdquo;
+            </p>
+          </div>
+
+          {/* Login Card */}
+          <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-5 sm:p-8">
+            <h2 className="text-lg sm:text-xl font-semibold text-slate-800 mb-4 sm:mb-6 text-center">
+              Sign In
+            </h2>
+
+            <LoginForm users={profiles || []} />
+          </div>
+
+          {/* Footer Quote */}
+          <p className="text-center text-xs sm:text-sm text-blue-200/70 mt-6 sm:mt-8 italic font-light max-w-sm mx-auto">
+            &ldquo;Real leadership begins where comfort ends.&rdquo;
           </p>
         </div>
 
-        {/* Login Card */}
-        <div className="bg-white rounded-xl shadow-lg p-8">
-          <h2 className="text-xl font-semibold text-slate-800 mb-6 text-center">
-            Sign In
-          </h2>
-
-          <LoginForm users={profiles || []} />
-        </div>
-
-        {/* Footer */}
-        <p className="text-center text-sm text-slate-400 mt-6">
-          Private application for Cascadia leadership team
-        </p>
       </div>
     </div>
   )

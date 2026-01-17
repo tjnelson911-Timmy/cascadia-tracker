@@ -182,61 +182,49 @@ export default async function DashboardPage() {
   })
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-100">
       {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+      <header className="bg-gradient-to-r from-blue-600 to-blue-700 shadow-lg sticky top-0 z-40">
+        <div className="max-w-7xl mx-auto px-3 py-3 sm:px-6 sm:py-4 lg:px-8">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-2xl font-bold text-slate-800">Cascadia</h1>
-              <p className="text-sm text-slate-500 hidden sm:block">Leadership Presence Tracker</p>
+              <h1 className="text-lg sm:text-2xl font-bold text-white">Leadership Presence Tracker</h1>
+              <p className="text-xs sm:text-sm text-blue-100 hidden sm:block italic font-light">&ldquo;Leadership isn&apos;t about being perfect. It&apos;s about being present.&rdquo;</p>
             </div>
             <div className="flex items-center gap-2 sm:gap-4">
               <Link
+                href="/admin/users"
+                className="px-3 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors hidden sm:block"
+              >
+                Team Visits
+              </Link>
+              <Link
                 href="/visits"
-                className="px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors hidden sm:block"
+                className="px-3 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors hidden sm:block"
               >
                 All Visits
               </Link>
-              <Link
-                href="/admin/users"
-                className="px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors hidden sm:block"
-              >
-                Team
-              </Link>
-              <Link
-                href="/admin/add-facility"
-                className="px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors hidden sm:block"
-              >
-                + Facility
-              </Link>
-              <span className="text-slate-600 hidden md:block">{profile?.full_name}</span>
+              <span className="text-white/80 hidden md:block">{profile?.full_name}</span>
               <LogoutButton />
             </div>
           </div>
           {/* Mobile Nav */}
           <div className="flex gap-2 mt-3 sm:hidden overflow-x-auto pb-1">
             <Link
+              href="/admin/users"
+              className="px-3 py-1.5 text-sm font-medium text-white bg-white/20 rounded-lg whitespace-nowrap"
+            >
+              Team Visits
+            </Link>
+            <Link
               href="/visits"
-              className="px-3 py-1.5 text-sm font-medium text-slate-600 bg-slate-100 rounded-lg whitespace-nowrap"
+              className="px-3 py-1.5 text-sm font-medium text-white bg-white/20 rounded-lg whitespace-nowrap"
             >
               All Visits
             </Link>
             <Link
-              href="/admin/users"
-              className="px-3 py-1.5 text-sm font-medium text-slate-600 bg-slate-100 rounded-lg whitespace-nowrap"
-            >
-              Team
-            </Link>
-            <Link
-              href="/admin/add-facility"
-              className="px-3 py-1.5 text-sm font-medium text-slate-600 bg-slate-100 rounded-lg whitespace-nowrap"
-            >
-              + Facility
-            </Link>
-            <Link
               href="/upload"
-              className="px-3 py-1.5 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg whitespace-nowrap"
+              className="px-3 py-1.5 text-sm font-medium text-white bg-white/30 rounded-lg whitespace-nowrap"
             >
               + Record
             </Link>

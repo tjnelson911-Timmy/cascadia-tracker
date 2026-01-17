@@ -128,8 +128,8 @@ export default function TimelinePlayer({ visits }: TimelinePlayerProps) {
   }
 
   return (
-    <div className="bg-white rounded-xl shadow overflow-hidden">
-      <div className="px-6 py-4 border-b border-slate-100">
+    <div className="bg-white rounded-2xl shadow-md overflow-hidden">
+      <div className="px-6 py-4 border-b border-slate-100/50">
         <h3 className="font-semibold text-slate-800">Visit Timeline</h3>
       </div>
 
@@ -177,7 +177,7 @@ export default function TimelinePlayer({ visits }: TimelinePlayerProps) {
       </div>
 
       {/* Controls */}
-      <div className="px-4 sm:px-6 py-3 sm:py-4 border-t border-slate-100 space-y-3">
+      <div className="px-4 sm:px-6 py-3 sm:py-4 border-t border-slate-100/50 space-y-3">
         {/* Progress slider */}
         <div className="flex items-center gap-2 sm:gap-4">
           <span className="text-xs sm:text-sm text-slate-500 w-16 sm:w-24 flex-shrink-0">

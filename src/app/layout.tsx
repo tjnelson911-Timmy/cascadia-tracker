@@ -13,14 +13,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Cascadia",
-  description: "Leadership Presence Tracker for Cascadia team",
+  title: "Leadership Presence Tracker",
+  description: "Leadership isn't about being perfect. It's about being present.",
   manifest: "/manifest.json",
   themeColor: "#2563eb",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Cascadia",
+    title: "Leadership Tracker",
   },
   viewport: {
     width: "device-width",
@@ -29,24 +29,24 @@ export const metadata: Metadata = {
     userScalable: false,
   },
   openGraph: {
-    title: "Cascadia",
-    description: "Leadership Presence Tracker for Cascadia team",
+    title: "Leadership Presence Tracker",
+    description: "Leadership isn't about being perfect. It's about being present.",
     url: "https://cascadia-tracker.vercel.app",
-    siteName: "Cascadia",
+    siteName: "Leadership Presence Tracker",
     type: "website",
     images: [
       {
         url: "https://cascadia-tracker.vercel.app/icon-512.png",
         width: 512,
         height: 512,
-        alt: "Cascadia Logo",
+        alt: "Leadership Presence Tracker Logo",
       },
     ],
   },
   twitter: {
     card: "summary",
-    title: "Cascadia",
-    description: "Leadership Presence Tracker for Cascadia team",
+    title: "Leadership Presence Tracker",
+    description: "Leadership isn't about being perfect. It's about being present.",
     images: ["https://cascadia-tracker.vercel.app/icon-512.png"],
   },
 };

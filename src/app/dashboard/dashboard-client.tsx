@@ -171,29 +171,29 @@ export default function DashboardClient({
   const hasFilters = companyFilter || teamFilter || typeFilter
 
   return (
-    <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 space-y-8">
+    <main className="max-w-7xl mx-auto px-3 py-4 sm:px-6 sm:py-8 lg:px-8 space-y-4 sm:space-y-8">
       {/* Action Card */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 rounded-2xl shadow-xl p-8 text-white">
+      <div className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 rounded-2xl shadow-xl p-4 sm:p-8 text-white">
         <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-white/10 rounded-full blur-2xl" />
         <div className="absolute bottom-0 left-0 -mb-8 -ml-8 w-32 h-32 bg-blue-400/20 rounded-full blur-3xl" />
 
-        <div className="relative flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+        <div className="relative flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-bold mb-2">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2">
               Welcome back, {userName}!
             </h2>
-            <p className="text-blue-100 text-lg">
+            <p className="text-blue-100 text-sm sm:text-lg">
               {stats.completionPercentage < 100
                 ? `You're ${stats.completionPercentage}% complete. Keep going!`
                 : 'Amazing! You\'ve visited all facilities!'}
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-3">
+          <div className="flex flex-row sm:flex-row gap-2 sm:gap-3">
             <Link
               href="/upload"
-              className="inline-flex items-center justify-center gap-2 bg-white text-blue-600 font-semibold py-3 px-6 rounded-xl hover:bg-blue-50 transition-all hover:shadow-lg hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-white text-blue-600 font-semibold py-2.5 sm:py-3 px-4 sm:px-6 rounded-xl hover:bg-blue-50 transition-all hover:shadow-lg hover:-translate-y-0.5 text-sm sm:text-base flex-1 sm:flex-none"
             >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
@@ -201,9 +201,9 @@ export default function DashboardClient({
             </Link>
             <Link
               href="/admin/add-facility"
-              className="inline-flex items-center justify-center gap-2 bg-white/20 backdrop-blur text-white font-semibold py-3 px-6 rounded-xl hover:bg-white/30 transition-all border border-white/30"
+              className="inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-white/20 backdrop-blur text-white font-semibold py-2.5 sm:py-3 px-4 sm:px-6 rounded-xl hover:bg-white/30 transition-all border border-white/30 text-sm sm:text-base flex-1 sm:flex-none"
             >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
               </svg>
               Add Facility
@@ -228,21 +228,21 @@ export default function DashboardClient({
       />
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 hover:shadow-md transition-shadow">
-          <div className="flex items-center justify-between">
+      <div className="grid grid-cols-3 gap-2 sm:gap-6">
+        <div className="bg-white rounded-xl sm:rounded-2xl shadow-md p-3 sm:p-6 hover:shadow-lg transition-shadow">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h3 className="text-sm font-medium text-slate-500 uppercase tracking-wide">
-                {hasFilters ? 'Filtered Facilities' : 'Total Facilities'}
+              <h3 className="text-[10px] sm:text-sm font-medium text-slate-500 uppercase tracking-wide">
+                {hasFilters ? 'Filtered' : 'Facilities'}
               </h3>
-              <p className="text-4xl font-bold text-slate-800 mt-2">
+              <p className="text-2xl sm:text-4xl font-bold text-slate-800 mt-1 sm:mt-2">
                 {stats.totalFacilities}
               </p>
-              <p className="text-sm text-slate-400 mt-1">
+              <p className="text-[10px] sm:text-sm text-slate-400 mt-0.5 sm:mt-1 hidden sm:block">
                 {hasFilters ? 'Matching filters' : 'In the system'}
               </p>
             </div>
-            <div className="w-14 h-14 bg-slate-100 rounded-xl flex items-center justify-center">
+            <div className="hidden sm:flex w-14 h-14 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl items-center justify-center">
               <svg className="w-7 h-7 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
               </svg>
@@ -250,20 +250,20 @@ export default function DashboardClient({
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 hover:shadow-md transition-shadow">
-          <div className="flex items-center justify-between">
+        <div className="bg-white rounded-xl sm:rounded-2xl shadow-md p-3 sm:p-6 hover:shadow-lg transition-shadow">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h3 className="text-sm font-medium text-slate-500 uppercase tracking-wide">
-                Facilities Visited
+              <h3 className="text-[10px] sm:text-sm font-medium text-slate-500 uppercase tracking-wide">
+                Visited
               </h3>
-              <p className="text-4xl font-bold text-emerald-600 mt-2">
+              <p className="text-2xl sm:text-4xl font-bold text-emerald-600 mt-1 sm:mt-2">
                 {stats.visitedFacilities}
               </p>
-              <p className="text-sm text-slate-400 mt-1">
+              <p className="text-[10px] sm:text-sm text-slate-400 mt-0.5 sm:mt-1 hidden sm:block">
                 {hasFilters ? 'In filtered set' : 'Unique facilities'}
               </p>
             </div>
-            <div className="w-14 h-14 bg-emerald-100 rounded-xl flex items-center justify-center">
+            <div className="hidden sm:flex w-14 h-14 bg-gradient-to-br from-emerald-100 to-emerald-200 rounded-xl items-center justify-center">
               <svg className="w-7 h-7 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -271,23 +271,23 @@ export default function DashboardClient({
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 hover:shadow-md transition-shadow">
-          <div className="flex items-center justify-between">
+        <div className="bg-white rounded-xl sm:rounded-2xl shadow-md p-3 sm:p-6 hover:shadow-lg transition-shadow">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
             <div className="flex-1">
-              <h3 className="text-sm font-medium text-slate-500 uppercase tracking-wide">
-                Completion
+              <h3 className="text-[10px] sm:text-sm font-medium text-slate-500 uppercase tracking-wide">
+                Complete
               </h3>
-              <p className="text-4xl font-bold text-blue-600 mt-2">
+              <p className="text-2xl sm:text-4xl font-bold text-blue-600 mt-1 sm:mt-2">
                 {stats.completionPercentage}%
               </p>
-              <div className="mt-3 w-full bg-slate-200 rounded-full h-2.5">
+              <div className="mt-2 sm:mt-3 w-full bg-slate-200 rounded-full h-1.5 sm:h-2.5">
                 <div
-                  className="bg-gradient-to-r from-blue-500 to-blue-600 h-2.5 rounded-full transition-all"
+                  className="bg-gradient-to-r from-blue-500 to-blue-600 h-1.5 sm:h-2.5 rounded-full transition-all"
                   style={{ width: `${stats.completionPercentage}%` }}
                 />
               </div>
             </div>
-            <div className="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center ml-4">
+            <div className="hidden sm:flex w-14 h-14 bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl items-center justify-center ml-4">
               <svg className="w-7 h-7 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
               </svg>
@@ -310,8 +310,8 @@ export default function DashboardClient({
       <DashboardTimelinePlayer visits={filteredTimelineVisits} />
 
       {/* Recent Visits */}
-      <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-        <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+      <div className="bg-white rounded-2xl shadow-md overflow-hidden">
+        <div className="px-6 py-4 border-b border-slate-100/50 flex items-center justify-between">
           <h3 className="text-lg font-semibold text-slate-800">Recent Visits</h3>
           <Link
             href="/visits"
@@ -321,7 +321,7 @@ export default function DashboardClient({
           </Link>
         </div>
         {filteredRecentVisits.length > 0 ? (
-          <ul className="divide-y divide-slate-100">
+          <ul className="divide-y divide-slate-100/50">
             {filteredRecentVisits.map((visit) => {
               const facility = visit.facilities
               return (

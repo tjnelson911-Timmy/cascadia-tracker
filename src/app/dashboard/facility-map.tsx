@@ -226,9 +226,9 @@ export default function FacilityMap({ facilities }: FacilityMapProps) {
   }
 
   return (
-    <div className="bg-white overflow-hidden rounded-2xl shadow-sm border border-slate-100">
+    <div className="bg-white overflow-hidden rounded-2xl shadow-md">
       {/* Header with filters */}
-      <div className="px-4 sm:px-6 py-4 border-b border-slate-100">
+      <div className="px-4 sm:px-6 py-4 border-b border-slate-100/50">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
