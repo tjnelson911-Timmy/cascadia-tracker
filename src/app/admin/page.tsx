@@ -1,8 +1,10 @@
 /**
  * Admin Panel Page
  *
- * Main admin dashboard with links to manage users and facilities.
- * Only accessible to users with is_admin = true.
+ * Main admin dashboard with links to:
+ * - View all visits (from all users)
+ * - Add new users
+ * - Add new facilities
  */
 
 import { createClient } from '@/lib/supabase/server'
@@ -30,10 +32,11 @@ export default async function AdminPage() {
     redirect('/dashboard')
   }
 
-  // Get counts for display
+  // Get counts for display (exclude admin from user count)
   const { count: userCount } = await supabase
     .from('profiles')
     .select('*', { count: 'exact', head: true })
+    .eq('is_admin', false)
 
   const { count: facilityCount } = await supabase
     .from('facilities')
@@ -51,13 +54,13 @@ export default async function AdminPage() {
           <div className="flex justify-between items-center">
             <div>
               <h1 className="text-2xl font-bold text-white">Admin Panel</h1>
-              <p className="text-sm text-slate-300">Welcome, {profile.full_name}</p>
+              <p className="text-sm text-slate-300">Manage users and facilities</p>
             </div>
             <Link
-              href="/dashboard"
+              href="/login"
               className="px-4 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
             >
-              Back to Dashboard
+              Log Out
             </Link>
           </div>
         </div>
@@ -69,7 +72,7 @@ export default async function AdminPage() {
         <div className="grid grid-cols-3 gap-4 mb-8">
           <div className="bg-white rounded-xl shadow-md p-6 text-center">
             <p className="text-3xl font-bold text-slate-800">{userCount ?? 0}</p>
-            <p className="text-sm text-slate-500">Users</p>
+            <p className="text-sm text-slate-500">Team Members</p>
           </div>
           <div className="bg-white rounded-xl shadow-md p-6 text-center">
             <p className="text-3xl font-bold text-slate-800">{facilityCount ?? 0}</p>
@@ -84,10 +87,29 @@ export default async function AdminPage() {
         {/* Admin Actions */}
         <div className="bg-white rounded-xl shadow-md overflow-hidden">
           <div className="px-6 py-4 border-b border-slate-100">
-            <h2 className="text-lg font-semibold text-slate-800">Manage</h2>
+            <h2 className="text-lg font-semibold text-slate-800">Admin Functions</h2>
           </div>
 
           <div className="divide-y divide-slate-100">
+            {/* View All Visits */}
+            <Link
+              href="/admin/all-visits"
+              className="flex items-center gap-4 px-6 py-4 hover:bg-slate-50 transition-colors"
+            >
+              <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+                <svg className="w-6 h-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                </svg>
+              </div>
+              <div className="flex-1">
+                <p className="font-medium text-slate-800">View All Visits</p>
+                <p className="text-sm text-slate-500">See all visits from all team members</p>
+              </div>
+              <svg className="w-5 h-5 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+
             {/* Add User */}
             <Link
               href="/admin/add-user"
@@ -119,65 +141,7 @@ export default async function AdminPage() {
               </div>
               <div className="flex-1">
                 <p className="font-medium text-slate-800">Add New Facility</p>
-                <p className="text-sm text-slate-500">Add a single facility with auto-geocoding</p>
-              </div>
-              <svg className="w-5 h-5 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
-
-            {/* Import Facilities */}
-            <Link
-              href="/admin/import-facilities"
-              className="flex items-center gap-4 px-6 py-4 hover:bg-slate-50 transition-colors"
-            >
-              <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                <svg className="w-6 h-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                </svg>
-              </div>
-              <div className="flex-1">
-                <p className="font-medium text-slate-800">Import Facilities</p>
-                <p className="text-sm text-slate-500">Bulk import from Excel or CSV file</p>
-              </div>
-              <svg className="w-5 h-5 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
-
-            {/* Geocode Facilities */}
-            <Link
-              href="/admin/geocode-facilities"
-              className="flex items-center gap-4 px-6 py-4 hover:bg-slate-50 transition-colors"
-            >
-              <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center">
-                <svg className="w-6 h-6 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-              </div>
-              <div className="flex-1">
-                <p className="font-medium text-slate-800">Geocode Facilities</p>
-                <p className="text-sm text-slate-500">Add map coordinates to facilities</p>
-              </div>
-              <svg className="w-5 h-5 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
-
-            {/* View Team Progress */}
-            <Link
-              href="/admin/users"
-              className="flex items-center gap-4 px-6 py-4 hover:bg-slate-50 transition-colors"
-            >
-              <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center">
-                <svg className="w-6 h-6 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-              </div>
-              <div className="flex-1">
-                <p className="font-medium text-slate-800">View Team Progress</p>
-                <p className="text-sm text-slate-500">See leaderboard and individual stats</p>
+                <p className="text-sm text-slate-500">Add a facility to track visits</p>
               </div>
               <svg className="w-5 h-5 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

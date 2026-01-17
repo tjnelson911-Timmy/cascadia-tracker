@@ -25,11 +25,14 @@ export default async function AdminUsersPage() {
     .from('facilities')
     .select('*', { count: 'exact', head: true })
 
-  // Get all profiles
+  // Get all profiles (exclude admins)
   const { data: profiles } = await supabase
     .from('profiles')
-    .select('id, full_name')
+    .select('id, full_name, is_admin')
     .order('full_name')
+
+  // Filter out admin users from the leaderboard
+  const teamProfiles = (profiles || []).filter(p => !p.is_admin)
 
   // Get completion counts for each user
   const { data: completions } = await supabase
@@ -41,8 +44,8 @@ export default async function AdminUsersPage() {
     .from('visits')
     .select('user_id')
 
-  // Calculate stats for each user
-  const userStats = (profiles || []).map(profile => {
+  // Calculate stats for each user (using teamProfiles to exclude admins)
+  const userStats = teamProfiles.map(profile => {
     const facilitiesVisited = completions?.filter(c => c.user_id === profile.id).length || 0
     const totalVisits = visits?.filter(v => v.user_id === profile.id).length || 0
     const completionPercentage = totalFacilities
@@ -108,7 +111,7 @@ export default async function AdminUsersPage() {
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-slate-800">Team Progress</h2>
           <p className="text-slate-500">
-            {totalFacilities} total facilities • {profiles?.length || 0} team members
+            {totalFacilities} total facilities • {teamProfiles.length} team members
           </p>
         </div>
 

@@ -52,6 +52,11 @@ export default async function LoginPage() {
     console.error('Error fetching profiles:', error)
   }
 
+  // Filter out admin users from the dropdown (they use a separate login)
+  const teamProfiles = (profiles || []).filter(
+    (p: { full_name: string }) => p.full_name !== 'Admin'
+  )
+
   const featuredQuote = getFeaturedQuote()
 
   return (
@@ -104,12 +109,19 @@ export default async function LoginPage() {
               Sign In
             </h2>
 
-            <LoginForm users={profiles || []} />
+            <LoginForm users={teamProfiles} />
           </div>
 
           {/* Footer Quote */}
           <p className="text-center text-xs sm:text-sm text-blue-200/70 mt-6 sm:mt-8 italic font-light max-w-sm mx-auto">
             &ldquo;Real leadership begins where comfort ends.&rdquo;
+          </p>
+
+          {/* Admin Login Link */}
+          <p className="text-center text-xs text-blue-300/50 mt-4">
+            <a href="/admin/login" className="hover:text-blue-200 transition-colors">
+              Admin Login
+            </a>
           </p>
         </div>
 
