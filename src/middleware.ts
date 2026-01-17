@@ -8,19 +8,12 @@
  * - Automatically refreshing it if needed
  *
  * Without this, users would get logged out randomly.
- *
- * HOW IT WORKS:
- * 1. User makes a request
- * 2. Middleware checks their session cookie
- * 3. If session is expiring soon, it gets a fresh one from Supabase
- * 4. New session cookie is set in the response
- * 5. Request continues to your page
  */
 
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
     request,
   })
@@ -46,7 +39,7 @@ export async function proxy(request: NextRequest) {
     }
   )
 
-  // Refresh the session - this is the key operation
+  // Refresh the session - this keeps users logged in
   await supabase.auth.getUser()
 
   return supabaseResponse
