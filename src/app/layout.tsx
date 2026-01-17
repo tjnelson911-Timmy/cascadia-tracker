@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Cascadia",
-  description: "Leadership Presence Tracker",
+  description: "Leadership Presence Tracker for Cascadia team",
   manifest: "/manifest.json",
   themeColor: "#2563eb",
   appleWebApp: {
@@ -27,6 +27,27 @@ export const metadata: Metadata = {
     initialScale: 1,
     maximumScale: 1,
     userScalable: false,
+  },
+  openGraph: {
+    title: "Cascadia",
+    description: "Leadership Presence Tracker for Cascadia team",
+    url: "https://cascadia-tracker.vercel.app",
+    siteName: "Cascadia",
+    type: "website",
+    images: [
+      {
+        url: "https://cascadia-tracker.vercel.app/icon-512.png",
+        width: 512,
+        height: 512,
+        alt: "Cascadia Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: "Cascadia",
+    description: "Leadership Presence Tracker for Cascadia team",
+    images: ["https://cascadia-tracker.vercel.app/icon-512.png"],
   },
 };
 
