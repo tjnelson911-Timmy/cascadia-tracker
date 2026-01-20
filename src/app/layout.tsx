@@ -31,12 +31,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Leadership Presence Tracker",
     description: "Leadership isn't about being perfect. It's about being present.",
-    url: "https://cascadia-tracker.vercel.app",
+    url: "https://visitmybuilding.com",
     siteName: "Leadership Presence Tracker",
     type: "website",
     images: [
       {
-        url: "https://cascadia-tracker.vercel.app/icon-512.png",
+        url: "https://visitmybuilding.com/icon-512.png",
         width: 512,
         height: 512,
         alt: "Leadership Presence Tracker Logo",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     card: "summary",
     title: "Leadership Presence Tracker",
     description: "Leadership isn't about being perfect. It's about being present.",
-    images: ["https://cascadia-tracker.vercel.app/icon-512.png"],
+    images: ["https://visitmybuilding.com/icon-512.png"],
   },
 };
 
