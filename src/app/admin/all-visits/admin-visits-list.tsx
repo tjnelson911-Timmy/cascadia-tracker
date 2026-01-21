@@ -147,7 +147,7 @@ export default function AdminVisitsList({ visits, facilityTypes, userNames }: Ad
                 placeholder="Search facilities, notes, users..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-slate-800 placeholder-slate-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-slate-800 placeholder-slate-400 focus:ring-2 focus:ring-cascadia-500 focus:border-transparent"
               />
             </div>
           </div>
@@ -157,7 +157,7 @@ export default function AdminVisitsList({ visits, facilityTypes, userNames }: Ad
             <select
               value={userFilter}
               onChange={(e) => setUserFilter(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-800 focus:ring-2 focus:ring-cascadia-500 focus:border-transparent"
             >
               <option value="">All Users</option>
               {userNames.map(name => (
@@ -171,7 +171,7 @@ export default function AdminVisitsList({ visits, facilityTypes, userNames }: Ad
             <select
               value={typeFilter}
               onChange={(e) => setTypeFilter(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-800 focus:ring-2 focus:ring-cascadia-500 focus:border-transparent"
             >
               <option value="">All Types</option>
               {facilityTypes.map(type => (
@@ -186,7 +186,7 @@ export default function AdminVisitsList({ visits, facilityTypes, userNames }: Ad
               type="date"
               value={dateFrom}
               onChange={(e) => setDateFrom(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-800 focus:ring-2 focus:ring-cascadia-500 focus:border-transparent"
             />
           </div>
 
@@ -196,7 +196,7 @@ export default function AdminVisitsList({ visits, facilityTypes, userNames }: Ad
               type="date"
               value={dateTo}
               onChange={(e) => setDateTo(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-800 focus:ring-2 focus:ring-cascadia-500 focus:border-transparent"
             />
           </div>
         </div>
@@ -208,7 +208,7 @@ export default function AdminVisitsList({ visits, facilityTypes, userNames }: Ad
             {hasFilters && (
               <button
                 onClick={clearFilters}
-                className="ml-2 text-blue-600 hover:text-blue-700 font-medium"
+                className="ml-2 text-cascadia-600 hover:text-cascadia-700 font-medium"
               >
                 Clear filters
               </button>
@@ -267,7 +267,7 @@ export default function AdminVisitsList({ visits, facilityTypes, userNames }: Ad
                         {facility?.facility_name}
                       </p>
                       <p className="text-xs sm:text-sm text-slate-500">
-                        <span className="font-medium text-blue-600">{visit.user_name}</span>
+                        <span className="font-medium text-cascadia-600">{visit.user_name}</span>
                         <span className="mx-1">·</span>
                         {facility?.type}
                         <span className="hidden sm:inline">{facility?.city && ` · ${facility.city}, ${facility.state}`}</span>
@@ -310,7 +310,7 @@ export default function AdminVisitsList({ visits, facilityTypes, userNames }: Ad
           {hasFilters && (
             <button
               onClick={clearFilters}
-              className="mt-4 text-blue-600 hover:text-blue-700 font-medium"
+              className="mt-4 text-cascadia-600 hover:text-cascadia-700 font-medium"
             >
               Clear filters
             </button>

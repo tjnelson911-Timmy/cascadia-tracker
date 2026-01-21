@@ -10,6 +10,19 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Cascadia brand colors */
+  --color-cascadia-50: #e6f4f6;
+  --color-cascadia-100: #cce9ed;
+  --color-cascadia-200: #99d3db;
+  --color-cascadia-300: #66bdc9;
+  --color-cascadia-400: #33a7b7;
+  --color-cascadia-500: #1397a5;
+  --color-cascadia-600: #0f8494;
+  --color-cascadia-700: #0b717f;
+  --color-cascadia-800: #085a66;
+  --color-cascadia-900: #05434d;
+  --color-cascadia-950: #032c33;
 }
 
 @media (prefers-color-scheme: dark) {

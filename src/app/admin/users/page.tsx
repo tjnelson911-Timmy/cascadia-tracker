@@ -63,12 +63,15 @@ export default async function AdminUsersPage() {
   return (
     <div className="min-h-screen bg-slate-100">
       {/* Header - matching dashboard */}
-      <header className="bg-gradient-to-r from-blue-600 to-blue-700 shadow-lg sticky top-0 z-40">
+      <header className="bg-gradient-to-r from-cascadia-600 to-cascadia-700 shadow-lg sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
-            <div>
-              <h1 className="text-2xl font-bold text-white">Leadership Presence Tracker</h1>
-              <p className="text-sm text-blue-100 hidden sm:block italic font-light">&ldquo;Leadership isn&apos;t about being perfect. It&apos;s about being present.&rdquo;</p>
+            <div className="flex items-center gap-3">
+              <img src="/CL-white.png" alt="Cascadia" className="h-8 sm:h-10" />
+              <div>
+                <h1 className="text-2xl font-bold text-white">Leadership Presence Tracker</h1>
+                <p className="text-sm text-cascadia-100 hidden sm:block italic font-light">&ldquo;Leadership isn&apos;t about being perfect. It&apos;s about being present.&rdquo;</p>
+              </div>
             </div>
             <div className="flex items-center gap-2 sm:gap-4">
               <Link
@@ -161,7 +164,7 @@ export default async function AdminUsersPage() {
                     </p>
                     <p className={`text-sm font-medium ${
                       userStat.completionPercentage >= 75 ? 'text-emerald-600' :
-                      userStat.completionPercentage >= 50 ? 'text-blue-600' :
+                      userStat.completionPercentage >= 50 ? 'text-cascadia-600' :
                       userStat.completionPercentage >= 25 ? 'text-amber-600' :
                       'text-slate-500'
                     }`}>
@@ -175,7 +178,7 @@ export default async function AdminUsersPage() {
                       <div
                         className={`h-2.5 rounded-full transition-all ${
                           userStat.completionPercentage >= 75 ? 'bg-gradient-to-r from-emerald-400 to-emerald-500' :
-                          userStat.completionPercentage >= 50 ? 'bg-gradient-to-r from-blue-400 to-blue-500' :
+                          userStat.completionPercentage >= 50 ? 'bg-gradient-to-r from-cascadia-400 to-cascadia-500' :
                           userStat.completionPercentage >= 25 ? 'bg-gradient-to-r from-amber-400 to-amber-500' :
                           'bg-slate-400'
                         }`}

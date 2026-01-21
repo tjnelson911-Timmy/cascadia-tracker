@@ -186,12 +186,15 @@ export default async function DashboardPage() {
   return (
     <div className="min-h-screen bg-slate-100">
       {/* Header */}
-      <header className="bg-gradient-to-r from-blue-600 to-blue-700 shadow-lg sticky top-0 z-40">
+      <header className="bg-gradient-to-r from-cascadia-600 to-cascadia-700 shadow-lg sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-3 py-3 sm:px-6 sm:py-4 lg:px-8">
           <div className="flex justify-between items-center">
-            <div>
-              <h1 className="text-lg sm:text-2xl font-bold text-white">Leadership Presence Tracker</h1>
-              <p className="text-xs sm:text-sm text-blue-100 hidden sm:block italic font-light">&ldquo;Leadership isn&apos;t about being perfect. It&apos;s about being present.&rdquo;</p>
+            <div className="flex items-center gap-3">
+              <img src="/CL-white.png" alt="Cascadia" className="h-8 sm:h-10" />
+              <div>
+                <h1 className="text-lg sm:text-2xl font-bold text-white">Leadership Presence Tracker</h1>
+                <p className="text-xs sm:text-sm text-cascadia-100 hidden sm:block italic font-light">&ldquo;Leadership isn&apos;t about being perfect. It&apos;s about being present.&rdquo;</p>
+              </div>
             </div>
             <div className="flex items-center gap-2 sm:gap-4">
               {isAdmin && (

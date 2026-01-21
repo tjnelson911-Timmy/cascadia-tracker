@@ -74,12 +74,15 @@ export default async function VisitsPage() {
   return (
     <div className="min-h-screen bg-slate-100">
       {/* Header - matching dashboard */}
-      <header className="bg-gradient-to-r from-blue-600 to-blue-700 shadow-lg sticky top-0 z-40">
+      <header className="bg-gradient-to-r from-cascadia-600 to-cascadia-700 shadow-lg sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
-            <div>
-              <h1 className="text-2xl font-bold text-white">Leadership Presence Tracker</h1>
-              <p className="text-sm text-blue-100 hidden sm:block italic font-light">&ldquo;Leadership isn&apos;t about being perfect. It&apos;s about being present.&rdquo;</p>
+            <div className="flex items-center gap-3">
+              <img src="/CL-white.png" alt="Cascadia" className="h-8 sm:h-10" />
+              <div>
+                <h1 className="text-2xl font-bold text-white">Leadership Presence Tracker</h1>
+                <p className="text-sm text-cascadia-100 hidden sm:block italic font-light">&ldquo;Leadership isn&apos;t about being perfect. It&apos;s about being present.&rdquo;</p>
+              </div>
             </div>
             <div className="flex items-center gap-2 sm:gap-4">
               <Link
@@ -127,7 +130,7 @@ export default async function VisitsPage() {
           </div>
           <Link
             href="/upload"
-            className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-5 rounded-xl transition-all hover:shadow-lg hover:-translate-y-0.5"
+            className="inline-flex items-center justify-center gap-2 bg-cascadia-600 hover:bg-cascadia-700 text-white font-semibold py-2.5 px-5 rounded-xl transition-all hover:shadow-lg hover:-translate-y-0.5"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />

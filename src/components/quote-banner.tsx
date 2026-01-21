@@ -11,11 +11,11 @@ import { getRandomQuotes, type Quote } from '@/lib/quotes'
 
 // Different style combinations for visual variety
 const quoteVariants = [
-  { size: 'text-sm', font: 'font-light', opacity: 'text-blue-700/60' },
-  { size: 'text-base', font: 'font-medium', opacity: 'text-blue-700/70' },
-  { size: 'text-xs', font: 'font-semibold tracking-wide', opacity: 'text-blue-600/60' },
-  { size: 'text-sm', font: 'font-normal', opacity: 'text-blue-700/65' },
-  { size: 'text-base', font: 'font-light tracking-wider', opacity: 'text-blue-600/70' },
+  { size: 'text-sm', font: 'font-light', opacity: 'text-cascadia-700/60' },
+  { size: 'text-base', font: 'font-medium', opacity: 'text-cascadia-700/70' },
+  { size: 'text-xs', font: 'font-semibold tracking-wide', opacity: 'text-cascadia-600/60' },
+  { size: 'text-sm', font: 'font-normal', opacity: 'text-cascadia-700/65' },
+  { size: 'text-base', font: 'font-light tracking-wider', opacity: 'text-cascadia-600/70' },
 ]
 
 interface QuoteBannerProps {
@@ -26,7 +26,7 @@ export default function QuoteBanner({ count = 3 }: QuoteBannerProps) {
   const quotes = useMemo(() => getRandomQuotes(count, true), [count])
 
   return (
-    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-blue-100">
+    <div className="bg-gradient-to-r from-cascadia-50 to-cascadia-100 border-b border-cascadia-100">
       <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
           {quotes.map((quote, index) => {
@@ -38,7 +38,7 @@ export default function QuoteBanner({ count = 3 }: QuoteBannerProps) {
               >
                 &ldquo;{quote.text}&rdquo;
                 {quote.author && (
-                  <span className="text-blue-500/50 not-italic font-normal text-xs ml-1">
+                  <span className="text-cascadia-500/50 not-italic font-normal text-xs ml-1">
                     &mdash; {quote.author}
                   </span>
                 )}

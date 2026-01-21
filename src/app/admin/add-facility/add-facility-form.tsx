@@ -138,7 +138,7 @@ export default function AddFacilityForm({ facilityTypes }: AddFacilityFormProps)
           required
           value={formData.facility_name}
           onChange={handleChange}
-          className="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-800 focus:ring-2 focus:ring-cascadia-500 focus:border-transparent"
           placeholder="e.g., Sunrise Senior Living"
         />
       </div>
@@ -154,7 +154,7 @@ export default function AddFacilityForm({ facilityTypes }: AddFacilityFormProps)
           required
           value={formData.type}
           onChange={handleChange}
-          className="w-full px-4 py-2.5 rounded-lg border border-slate-300 bg-white text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-2.5 rounded-lg border border-slate-300 bg-white text-slate-800 focus:ring-2 focus:ring-cascadia-500 focus:border-transparent"
         >
           <option value="">Select a type...</option>
           {facilityTypes.map(type => (
@@ -177,7 +177,7 @@ export default function AddFacilityForm({ facilityTypes }: AddFacilityFormProps)
             required
             value={formData.customType}
             onChange={handleChange}
-            className="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-800 focus:ring-2 focus:ring-cascadia-500 focus:border-transparent"
             placeholder="e.g., Hospice"
           />
         </div>
@@ -194,7 +194,7 @@ export default function AddFacilityForm({ facilityTypes }: AddFacilityFormProps)
           name="address"
           value={formData.address}
           onChange={handleChange}
-          className="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-800 focus:ring-2 focus:ring-cascadia-500 focus:border-transparent"
           placeholder="123 Main St"
         />
       </div>
@@ -211,7 +211,7 @@ export default function AddFacilityForm({ facilityTypes }: AddFacilityFormProps)
             name="city"
             value={formData.city}
             onChange={handleChange}
-            className="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-800 focus:ring-2 focus:ring-cascadia-500 focus:border-transparent"
           />
         </div>
         <div className="col-span-1 sm:col-span-1">
@@ -225,7 +225,7 @@ export default function AddFacilityForm({ facilityTypes }: AddFacilityFormProps)
             maxLength={2}
             value={formData.state}
             onChange={handleChange}
-            className="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-800 focus:ring-2 focus:ring-cascadia-500 focus:border-transparent"
             placeholder="WA"
           />
         </div>
@@ -239,7 +239,7 @@ export default function AddFacilityForm({ facilityTypes }: AddFacilityFormProps)
             name="zip"
             value={formData.zip}
             onChange={handleChange}
-            className="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-800 focus:ring-2 focus:ring-cascadia-500 focus:border-transparent"
           />
         </div>
       </div>
@@ -255,7 +255,7 @@ export default function AddFacilityForm({ facilityTypes }: AddFacilityFormProps)
           name="county"
           value={formData.county}
           onChange={handleChange}
-          className="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-800 focus:ring-2 focus:ring-cascadia-500 focus:border-transparent"
         />
       </div>
 
@@ -271,7 +271,7 @@ export default function AddFacilityForm({ facilityTypes }: AddFacilityFormProps)
             name="company"
             value={formData.company}
             onChange={handleChange}
-            className="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-800 focus:ring-2 focus:ring-cascadia-500 focus:border-transparent"
           />
         </div>
         <div>
@@ -284,7 +284,7 @@ export default function AddFacilityForm({ facilityTypes }: AddFacilityFormProps)
             name="team"
             value={formData.team}
             onChange={handleChange}
-            className="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-800 focus:ring-2 focus:ring-cascadia-500 focus:border-transparent"
           />
         </div>
       </div>
@@ -300,7 +300,7 @@ export default function AddFacilityForm({ facilityTypes }: AddFacilityFormProps)
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full bg-cascadia-600 hover:bg-cascadia-700 text-white font-medium py-3 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isLoading ? (
           <span className="flex items-center justify-center gap-2">

@@ -173,16 +173,16 @@ export default function DashboardClient({
   return (
     <main className="max-w-7xl mx-auto px-3 py-4 sm:px-6 sm:py-8 lg:px-8 space-y-4 sm:space-y-8">
       {/* Action Card */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 rounded-2xl shadow-xl p-4 sm:p-8 text-white">
+      <div className="relative overflow-hidden bg-gradient-to-br from-cascadia-600 via-cascadia-700 to-cascadia-800 rounded-2xl shadow-xl p-4 sm:p-8 text-white">
         <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-white/10 rounded-full blur-2xl" />
-        <div className="absolute bottom-0 left-0 -mb-8 -ml-8 w-32 h-32 bg-blue-400/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 -mb-8 -ml-8 w-32 h-32 bg-cascadia-400/20 rounded-full blur-3xl" />
 
         <div className="relative flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6">
           <div>
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2">
               Welcome back, {userName}!
             </h2>
-            <p className="text-blue-100 text-sm sm:text-lg">
+            <p className="text-cascadia-100 text-sm sm:text-lg">
               {stats.completionPercentage < 100
                 ? `You're ${stats.completionPercentage}% complete. Keep going!`
                 : 'Amazing! You\'ve visited all facilities!'}
@@ -191,7 +191,7 @@ export default function DashboardClient({
           <div className="flex flex-row sm:flex-row gap-2 sm:gap-3">
             <Link
               href="/upload"
-              className="inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-white text-blue-600 font-semibold py-2.5 sm:py-3 px-4 sm:px-6 rounded-xl hover:bg-blue-50 transition-all hover:shadow-lg hover:-translate-y-0.5 text-sm sm:text-base flex-1 sm:flex-none"
+              className="inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-white text-cascadia-600 font-semibold py-2.5 sm:py-3 px-4 sm:px-6 rounded-xl hover:bg-cascadia-50 transition-all hover:shadow-lg hover:-translate-y-0.5 text-sm sm:text-base flex-1 sm:flex-none"
             >
               <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
@@ -277,18 +277,18 @@ export default function DashboardClient({
               <h3 className="text-[10px] sm:text-sm font-medium text-slate-500 uppercase tracking-wide">
                 Complete
               </h3>
-              <p className="text-2xl sm:text-4xl font-bold text-blue-600 mt-1 sm:mt-2">
+              <p className="text-2xl sm:text-4xl font-bold text-cascadia-600 mt-1 sm:mt-2">
                 {stats.completionPercentage}%
               </p>
               <div className="mt-2 sm:mt-3 w-full bg-slate-200 rounded-full h-1.5 sm:h-2.5">
                 <div
-                  className="bg-gradient-to-r from-blue-500 to-blue-600 h-1.5 sm:h-2.5 rounded-full transition-all"
+                  className="bg-gradient-to-r from-cascadia-500 to-cascadia-600 h-1.5 sm:h-2.5 rounded-full transition-all"
                   style={{ width: `${stats.completionPercentage}%` }}
                 />
               </div>
             </div>
-            <div className="hidden sm:flex w-14 h-14 bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl items-center justify-center ml-4">
-              <svg className="w-7 h-7 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="hidden sm:flex w-14 h-14 bg-gradient-to-br from-cascadia-100 to-cascadia-200 rounded-xl items-center justify-center ml-4">
+              <svg className="w-7 h-7 text-cascadia-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
               </svg>
             </div>
@@ -315,7 +315,7 @@ export default function DashboardClient({
           <h3 className="text-lg font-semibold text-slate-800">Recent Visits</h3>
           <Link
             href="/visits"
-            className="text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors"
+            className="text-sm font-medium text-cascadia-600 hover:text-cascadia-700 transition-colors"
           >
             View all
           </Link>
@@ -392,12 +392,12 @@ export default function DashboardClient({
                   setTeamFilter('')
                   setTypeFilter('')
                 }}
-                className="text-blue-600 hover:text-blue-700 font-medium"
+                className="text-cascadia-600 hover:text-cascadia-700 font-medium"
               >
                 Clear filters
               </button>
             ) : (
-              <Link href="/upload" className="text-blue-600 hover:text-blue-700 font-medium">
+              <Link href="/upload" className="text-cascadia-600 hover:text-cascadia-700 font-medium">
                 Record your first visit
               </Link>
             )}

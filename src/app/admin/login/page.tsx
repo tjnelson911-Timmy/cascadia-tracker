@@ -40,7 +40,7 @@ export default async function AdminLoginPage() {
         </div>
 
         <p className="text-center text-sm text-slate-500 mt-6">
-          <a href="/login" className="text-blue-400 hover:text-blue-300">
+          <a href="/login" className="text-cascadia-400 hover:text-cascadia-300">
             Back to team login
           </a>
         </p>

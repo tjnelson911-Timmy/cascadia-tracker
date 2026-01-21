@@ -152,7 +152,7 @@ export default function TimelinePlayer({ visits }: TimelinePlayerProps) {
               <div
                 className={`rounded-full border-2 border-white shadow-md transition-all duration-300 ${
                   index === currentIndex
-                    ? 'w-8 h-8 bg-blue-600 animate-pulse'
+                    ? 'w-8 h-8 bg-cascadia-600 animate-pulse'
                     : 'w-5 h-5 bg-green-500'
                 }`}
               />
@@ -165,7 +165,7 @@ export default function TimelinePlayer({ visits }: TimelinePlayerProps) {
           <div className="absolute top-2 left-2 sm:top-4 sm:left-4 bg-white/95 backdrop-blur rounded-lg shadow-lg px-3 py-2 sm:px-4 sm:py-3 max-w-[calc(100%-1rem)] sm:max-w-xs">
             <p className="font-semibold text-slate-800 text-sm sm:text-base truncate">{currentVisit.facility_name}</p>
             <p className="text-xs sm:text-sm text-slate-500">{currentVisit.type}</p>
-            <p className="text-xs sm:text-sm text-blue-600 font-medium mt-1">
+            <p className="text-xs sm:text-sm text-cascadia-600 font-medium mt-1">
               {new Date(currentVisit.visit_date).toLocaleDateString('en-US', {
                 month: 'short',
                 day: 'numeric',
@@ -189,7 +189,7 @@ export default function TimelinePlayer({ visits }: TimelinePlayerProps) {
             max={sortedVisits.length - 1}
             value={currentIndex}
             onChange={handleSliderChange}
-            className="flex-1 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+            className="flex-1 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-cascadia-600"
           />
         </div>
 
@@ -198,7 +198,7 @@ export default function TimelinePlayer({ visits }: TimelinePlayerProps) {
           <div className="flex items-center gap-2">
             <button
               onClick={handlePlayPause}
-              className="p-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors"
+              className="p-2 rounded-lg bg-cascadia-600 hover:bg-cascadia-700 text-white transition-colors"
             >
               {isPlaying ? (
                 <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -229,7 +229,7 @@ export default function TimelinePlayer({ visits }: TimelinePlayerProps) {
                 onClick={() => setSpeed(s)}
                 className={`px-2 sm:px-3 py-1 rounded text-xs sm:text-sm font-medium transition-colors ${
                   speed === s
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-cascadia-600 text-white'
                     : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                 }`}
               >

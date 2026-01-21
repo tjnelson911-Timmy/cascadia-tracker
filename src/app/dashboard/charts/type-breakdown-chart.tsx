@@ -26,7 +26,7 @@ interface TypeBreakdownChartProps {
 
 // Colors for each facility type
 const COLORS: Record<string, string> = {
-  'SNF': '#3b82f6',   // blue
+  'SNF': '#1397a5',   // blue
   'ALF': '#10b981',   // green
   'ILF': '#f59e0b',   // amber
   'Hospice': '#8b5cf6', // purple

@@ -60,24 +60,21 @@ export default async function LoginPage() {
   const featuredQuote = getFeaturedQuote()
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-cascadia-900 via-cascadia-800 to-cascadia-950 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-300 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-indigo-400 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-cascadia-300 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-cascadia-400 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
       </div>
 
       {/* Cascadia Logo Watermark */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-        <div className="text-center opacity-[0.04]">
-          <p className="text-[70px] sm:text-[120px] md:text-[180px] lg:text-[220px] font-black text-white tracking-tight leading-none">
-            CASCADIA
-          </p>
-          <p className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-light text-white tracking-widest mt-1 sm:mt-2">
-            CascadiaHC.com
-          </p>
-        </div>
+        <img
+          src="/cascadia-large.png"
+          alt=""
+          className="w-[400px] sm:w-[600px] md:w-[800px] lg:w-[1000px] opacity-[0.06]"
+        />
       </div>
 
 
@@ -95,10 +92,15 @@ export default async function LoginPage() {
         <div className="w-full max-w-md">
           {/* Logo/Branding */}
           <div className="text-center mb-6 sm:mb-8">
+            <img
+              src="/CL-white.png"
+              alt="Cascadia"
+              className="h-16 sm:h-20 mx-auto mb-4"
+            />
             <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight drop-shadow-md leading-tight">
               Leadership Presence Tracker
             </h1>
-            <p className="text-blue-200 mt-2 sm:mt-3 italic font-light text-sm sm:text-lg">
+            <p className="text-cascadia-200 mt-2 sm:mt-3 italic font-light text-sm sm:text-lg">
               &ldquo;Leaders show up whether they feel like it or not.&rdquo;
             </p>
           </div>
@@ -113,12 +115,12 @@ export default async function LoginPage() {
           </div>
 
           {/* Footer Quote */}
-          <p className="text-center text-xs sm:text-sm text-blue-200/70 mt-6 sm:mt-8 italic font-light max-w-sm mx-auto">
+          <p className="text-center text-xs sm:text-sm text-cascadia-200/70 mt-6 sm:mt-8 italic font-light max-w-sm mx-auto">
             &ldquo;Real leadership begins where comfort ends.&rdquo;
           </p>
 
           {/* Admin Login Link */}
-          <p className="text-center text-sm text-blue-200 mt-6">
+          <p className="text-center text-sm text-cascadia-200 mt-6">
             <a href="/admin/login" className="underline hover:text-white transition-colors">
               Admin Login
             </a>

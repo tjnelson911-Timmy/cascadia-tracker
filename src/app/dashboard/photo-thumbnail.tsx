@@ -29,7 +29,7 @@ export default function PhotoThumbnail({ src, alt }: PhotoThumbnailProps) {
           onClick={() => setIsModalOpen(true)}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className="w-12 h-12 rounded-lg object-cover cursor-pointer border border-slate-200 hover:border-blue-400 transition-all"
+          className="w-12 h-12 rounded-lg object-cover cursor-pointer border border-slate-200 hover:border-cascadia-400 transition-all"
         />
 
         {/* Hover preview - larger version */}

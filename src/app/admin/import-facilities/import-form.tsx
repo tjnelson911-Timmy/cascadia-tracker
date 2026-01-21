@@ -227,7 +227,7 @@ export default function ImportForm() {
           <div className="mt-6 max-w-md mx-auto">
             <div className="flex items-center justify-between text-sm text-slate-600 mb-2">
               <span className="flex items-center gap-2">
-                <svg className="animate-spin h-4 w-4 text-blue-600" viewBox="0 0 24 24">
+                <svg className="animate-spin h-4 w-4 text-cascadia-600" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                 </svg>
@@ -237,7 +237,7 @@ export default function ImportForm() {
             </div>
             <div className="w-full bg-slate-200 rounded-full h-2">
               <div
-                className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                className="bg-cascadia-600 h-2 rounded-full transition-all duration-300"
                 style={{ width: `${geocodeProgress}%` }}
               />
             </div>
@@ -270,7 +270,7 @@ export default function ImportForm() {
       <div
         onClick={() => fileInputRef.current?.click()}
         className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors ${
-          selectedFile ? 'border-blue-300 bg-blue-50' : 'border-slate-300 hover:border-slate-400'
+          selectedFile ? 'border-cascadia-300 bg-cascadia-50' : 'border-slate-300 hover:border-slate-400'
         }`}
       >
         {selectedFile ? (
@@ -332,7 +332,7 @@ export default function ImportForm() {
         <button
           onClick={handleImport}
           disabled={isLoading}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg disabled:opacity-50"
+          className="w-full bg-cascadia-600 hover:bg-cascadia-700 text-white font-medium py-3 px-4 rounded-lg disabled:opacity-50"
         >
           {isLoading ? 'Importing...' : `Import ${parsedData.length} Facilities`}
         </button>

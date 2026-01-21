@@ -194,7 +194,7 @@ export default function UploadForm({ facilities, userId }: UploadFormProps) {
           id="facility"
           value={selectedFacilityId}
           onChange={(e) => setSelectedFacilityId(e.target.value)}
-          className="w-full px-4 py-3 rounded-lg border border-slate-300 bg-white text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+          className="w-full px-4 py-3 rounded-lg border border-slate-300 bg-white text-slate-800 focus:ring-2 focus:ring-cascadia-500 focus:border-transparent transition-all"
           required
         >
           <option value="">Select a facility...</option>
@@ -220,7 +220,7 @@ export default function UploadForm({ facilities, userId }: UploadFormProps) {
           onClick={() => fileInputRef.current?.click()}
           className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors ${
             previewUrl
-              ? 'border-blue-300 bg-blue-50'
+              ? 'border-cascadia-300 bg-cascadia-50'
               : 'border-slate-300 hover:border-slate-400 hover:bg-slate-50'
           }`}
         >
@@ -282,7 +282,7 @@ export default function UploadForm({ facilities, userId }: UploadFormProps) {
           value={visitDate}
           onChange={(e) => setVisitDate(e.target.value)}
           max={new Date().toISOString().split('T')[0]}
-          className="w-full px-4 py-3 rounded-lg border border-slate-300 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+          className="w-full px-4 py-3 rounded-lg border border-slate-300 text-slate-800 focus:ring-2 focus:ring-cascadia-500 focus:border-transparent transition-all"
           required
         />
         <p className="text-sm text-slate-500 mt-1">
@@ -304,7 +304,7 @@ export default function UploadForm({ facilities, userId }: UploadFormProps) {
           onChange={(e) => setNote(e.target.value)}
           placeholder="Add any notes about your visit..."
           rows={3}
-          className="w-full px-4 py-3 rounded-lg border border-slate-300 text-slate-800 placeholder-slate-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+          className="w-full px-4 py-3 rounded-lg border border-slate-300 text-slate-800 placeholder-slate-400 focus:ring-2 focus:ring-cascadia-500 focus:border-transparent transition-all resize-none"
         />
       </div>
 
@@ -319,7 +319,7 @@ export default function UploadForm({ facilities, userId }: UploadFormProps) {
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full bg-cascadia-600 hover:bg-cascadia-700 text-white font-medium py-3 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isLoading ? (
           <span className="flex items-center justify-center gap-2">

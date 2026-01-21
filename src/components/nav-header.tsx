@@ -31,9 +31,12 @@ export default function NavHeader({ userName, onLogout }: NavHeaderProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
-          <Link href="/dashboard" className="flex-shrink-0">
-            <h1 className="text-2xl font-bold text-slate-800">Cascadia</h1>
-            <p className="text-sm text-slate-500 hidden sm:block">Leadership Presence Tracker</p>
+          <Link href="/dashboard" className="flex-shrink-0 flex items-center gap-3">
+            <img src="/cascadia-large.png" alt="Cascadia" className="h-10" />
+            <div>
+              <h1 className="text-xl font-bold text-cascadia-700">Cascadia</h1>
+              <p className="text-xs text-slate-500 hidden sm:block">Leadership Presence Tracker</p>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -44,7 +47,7 @@ export default function NavHeader({ userName, onLogout }: NavHeaderProps) {
                 href={link.href}
                 className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
                   pathname === link.href || pathname.startsWith(link.href + '/')
-                    ? 'bg-blue-50 text-blue-600'
+                    ? 'bg-cascadia-50 text-cascadia-600'
                     : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100'
                 }`}
               >
@@ -94,7 +97,7 @@ export default function NavHeader({ userName, onLogout }: NavHeaderProps) {
                   onClick={() => setMobileMenuOpen(false)}
                   className={`px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
                     pathname === link.href || pathname.startsWith(link.href + '/')
-                      ? 'bg-blue-50 text-blue-600'
+                      ? 'bg-cascadia-50 text-cascadia-600'
                       : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100'
                   }`}
                 >

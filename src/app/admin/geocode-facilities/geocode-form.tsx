@@ -158,7 +158,7 @@ export default function GeocodeForm({ facilities }: GeocodeFormProps) {
                               ? 'bg-green-100 text-green-700'
                               : result.status === 'failed'
                               ? 'bg-red-100 text-red-700'
-                              : 'bg-blue-100 text-blue-700'
+                              : 'bg-cascadia-100 text-cascadia-700'
                           }`}
                         >
                           {result.status === 'success' && '✓'}
@@ -187,7 +187,7 @@ export default function GeocodeForm({ facilities }: GeocodeFormProps) {
           </div>
           <div className="w-full bg-slate-200 rounded-full h-2">
             <div
-              className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+              className="bg-cascadia-600 h-2 rounded-full transition-all duration-300"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -215,7 +215,7 @@ export default function GeocodeForm({ facilities }: GeocodeFormProps) {
       <button
         onClick={handleGeocode}
         disabled={isRunning}
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full bg-cascadia-600 hover:bg-cascadia-700 text-white font-medium py-3 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isRunning ? (
           <span className="flex items-center justify-center gap-2">

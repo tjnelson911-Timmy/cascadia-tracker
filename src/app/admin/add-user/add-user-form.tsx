@@ -105,7 +105,7 @@ export default function AddUserForm() {
           required
           value={formData.fullName}
           onChange={handleChange}
-          className="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-800 focus:ring-2 focus:ring-cascadia-500 focus:border-transparent"
           placeholder="e.g., John Smith"
         />
         <p className="text-xs text-slate-400 mt-1">
@@ -125,7 +125,7 @@ export default function AddUserForm() {
           required
           value={formData.password}
           onChange={handleChange}
-          className="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-800 focus:ring-2 focus:ring-cascadia-500 focus:border-transparent"
           placeholder="Enter password"
         />
       </div>
@@ -142,7 +142,7 @@ export default function AddUserForm() {
           required
           value={formData.confirmPassword}
           onChange={handleChange}
-          className="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-slate-800 focus:ring-2 focus:ring-cascadia-500 focus:border-transparent"
           placeholder="Confirm password"
         />
       </div>
@@ -158,7 +158,7 @@ export default function AddUserForm() {
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full bg-cascadia-600 hover:bg-cascadia-700 text-white font-medium py-3 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isLoading ? (
           <span className="flex items-center justify-center gap-2">

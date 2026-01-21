@@ -88,7 +88,7 @@ export default async function UploadPage() {
               </p>
               <Link
                 href="/admin/import-facilities"
-                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+                className="inline-flex items-center gap-2 bg-cascadia-600 hover:bg-cascadia-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
               >
                 Import Facilities
               </Link>

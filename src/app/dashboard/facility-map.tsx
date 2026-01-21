@@ -61,7 +61,7 @@ const routeLayer: LayerProps = {
   id: 'route',
   type: 'line',
   paint: {
-    'line-color': '#3b82f6',
+    'line-color': '#1397a5',
     'line-width': 4,
     'line-opacity': 0.8
   }
@@ -217,7 +217,7 @@ export default function FacilityMap({ facilities }: FacilityMapProps) {
         <div className="text-center py-8 text-slate-500">
           <p className="font-medium text-slate-800 mb-2">No Facilities to Map</p>
           <p className="text-sm">Geocode your facilities to see them on the map.</p>
-          <a href="/admin/geocode-facilities" className="inline-block mt-4 text-blue-600 hover:text-blue-700 font-medium">
+          <a href="/admin/geocode-facilities" className="inline-block mt-4 text-cascadia-600 hover:text-cascadia-700 font-medium">
             Geocode Facilities →
           </a>
         </div>
@@ -231,8 +231,8 @@ export default function FacilityMap({ facilities }: FacilityMapProps) {
       <div className="px-4 sm:px-6 py-4 border-b border-slate-100/50">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
-              <svg className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="w-10 h-10 bg-cascadia-100 rounded-xl flex items-center justify-center">
+              <svg className="w-5 h-5 text-cascadia-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
               </svg>
             </div>
@@ -247,7 +247,7 @@ export default function FacilityMap({ facilities }: FacilityMapProps) {
             <select
               value={typeFilter}
               onChange={(e) => setTypeFilter(e.target.value)}
-              className="px-3 py-1.5 text-sm rounded-lg border border-slate-200 bg-white text-slate-700 focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-1.5 text-sm rounded-lg border border-slate-200 bg-white text-slate-700 focus:ring-2 focus:ring-cascadia-500"
             >
               <option value="">All Types</option>
               {facilityTypes.map(type => (
@@ -258,7 +258,7 @@ export default function FacilityMap({ facilities }: FacilityMapProps) {
             <div className="flex rounded-lg border border-slate-200 overflow-hidden">
               <button
                 onClick={() => setStatusFilter('all')}
-                className={`px-2 py-1.5 text-xs font-medium ${statusFilter === 'all' ? 'bg-blue-600 text-white' : 'bg-white text-slate-600'}`}
+                className={`px-2 py-1.5 text-xs font-medium ${statusFilter === 'all' ? 'bg-cascadia-600 text-white' : 'bg-white text-slate-600'}`}
               >
                 All
               </button>
@@ -301,7 +301,7 @@ export default function FacilityMap({ facilities }: FacilityMapProps) {
             <div className="flex rounded-lg border border-slate-200 overflow-hidden">
               <button
                 onClick={() => setViewMode('markers')}
-                className={`px-3 py-1.5 text-xs font-medium ${viewMode === 'markers' ? 'bg-blue-600 text-white' : 'bg-white text-slate-600'}`}
+                className={`px-3 py-1.5 text-xs font-medium ${viewMode === 'markers' ? 'bg-cascadia-600 text-white' : 'bg-white text-slate-600'}`}
               >
                 Markers
               </button>
@@ -318,7 +318,7 @@ export default function FacilityMap({ facilities }: FacilityMapProps) {
               onClick={() => routeMode ? clearRoute() : setRouteMode(true)}
               className={`px-3 py-1.5 text-xs font-medium rounded-lg ${
                 routeMode
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-cascadia-600 text-white'
                   : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
               }`}
             >
@@ -329,16 +329,16 @@ export default function FacilityMap({ facilities }: FacilityMapProps) {
 
         {/* Route Info */}
         {routeMode && (
-          <div className="mt-3 p-3 bg-blue-50 rounded-lg">
-            <p className="text-sm text-blue-800 font-medium">
+          <div className="mt-3 p-3 bg-cascadia-50 rounded-lg">
+            <p className="text-sm text-cascadia-800 font-medium">
               Click facilities to add to route ({routeStops.length} stops)
             </p>
             {routeStops.length > 0 && (
               <div className="mt-2 flex flex-wrap gap-2">
                 {routeStops.map((stop, i) => (
-                  <span key={stop.id} className="inline-flex items-center gap-1 text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">
+                  <span key={stop.id} className="inline-flex items-center gap-1 text-xs bg-cascadia-100 text-cascadia-700 px-2 py-1 rounded">
                     {i + 1}. {stop.facility_name}
-                    <button onClick={() => setRouteStops(prev => prev.filter(s => s.id !== stop.id))} className="ml-1 text-blue-500 hover:text-blue-700">×</button>
+                    <button onClick={() => setRouteStops(prev => prev.filter(s => s.id !== stop.id))} className="ml-1 text-cascadia-500 hover:text-cascadia-700">×</button>
                   </span>
                 ))}
               </div>
@@ -347,12 +347,12 @@ export default function FacilityMap({ facilities }: FacilityMapProps) {
               <div className="mt-2 flex items-center gap-3">
                 <button
                   onClick={calculateRoute}
-                  className="px-3 py-1.5 text-sm font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                  className="px-3 py-1.5 text-sm font-medium bg-cascadia-600 text-white rounded-lg hover:bg-cascadia-700"
                 >
                   Calculate Route
                 </button>
                 {routeInfo && (
-                  <span className="text-sm text-blue-700">
+                  <span className="text-sm text-cascadia-700">
                     {routeInfo.distance} · {routeInfo.duration}
                   </span>
                 )}
@@ -401,7 +401,7 @@ export default function FacilityMap({ facilities }: FacilityMapProps) {
               <div
                 className={`w-7 h-7 rounded-full border-2 border-white shadow-lg cursor-pointer transition-transform hover:scale-125 ${
                   routeStops.find(s => s.id === facility.id)
-                    ? 'bg-blue-600 ring-2 ring-blue-300'
+                    ? 'bg-cascadia-600 ring-2 ring-cascadia-300'
                     : facility.visited ? 'bg-emerald-500' : 'bg-slate-400'
                 }`}
                 onMouseEnter={() => !routeMode && setHoveredFacility(facility)}

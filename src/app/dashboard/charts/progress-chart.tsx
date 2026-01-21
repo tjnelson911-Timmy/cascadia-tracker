@@ -42,8 +42,8 @@ export default function ProgressChart({ data, totalFacilities }: ProgressChartPr
     return (
       <div className="bg-white rounded-2xl shadow-md p-6">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
-            <svg className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="w-10 h-10 bg-cascadia-100 rounded-xl flex items-center justify-center">
+            <svg className="w-5 h-5 text-cascadia-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
             </svg>
           </div>
@@ -59,8 +59,8 @@ export default function ProgressChart({ data, totalFacilities }: ProgressChartPr
   return (
     <div className="bg-white rounded-2xl shadow-md p-6">
       <div className="flex items-center gap-3 mb-4">
-        <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
-          <svg className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="w-10 h-10 bg-cascadia-100 rounded-xl flex items-center justify-center">
+          <svg className="w-5 h-5 text-cascadia-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
           </svg>
         </div>
@@ -71,8 +71,8 @@ export default function ProgressChart({ data, totalFacilities }: ProgressChartPr
           <AreaChart data={chartData} margin={{ top: 5, right: 5, bottom: 5, left: 0 }}>
             <defs>
               <linearGradient id="progressGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3} />
-                <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
+                <stop offset="5%" stopColor="#1397a5" stopOpacity={0.3} />
+                <stop offset="95%" stopColor="#1397a5" stopOpacity={0} />
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
@@ -100,7 +100,7 @@ export default function ProgressChart({ data, totalFacilities }: ProgressChartPr
             <Area
               type="monotone"
               dataKey="cumulative"
-              stroke="#3b82f6"
+              stroke="#1397a5"
               strokeWidth={2}
               fill="url(#progressGradient)"
             />

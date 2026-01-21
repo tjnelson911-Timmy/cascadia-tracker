@@ -94,7 +94,7 @@ export default async function GeocodeFacilitiesPage() {
               <div className="text-right">
                 <div className="w-32 bg-slate-200 rounded-full h-2">
                   <div
-                    className="bg-blue-600 h-2 rounded-full transition-all"
+                    className="bg-cascadia-600 h-2 rounded-full transition-all"
                     style={{ width: `${totalCount ? (geocodedCount / totalCount) * 100 : 0}%` }}
                   />
                 </div>
@@ -116,7 +116,7 @@ export default async function GeocodeFacilitiesPage() {
               <p className="text-slate-500 mb-4">All facilities have been geocoded.</p>
               <Link
                 href="/dashboard"
-                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+                className="inline-flex items-center gap-2 bg-cascadia-600 hover:bg-cascadia-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
               >
                 View Dashboard
               </Link>

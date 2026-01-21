@@ -137,7 +137,7 @@ export default function VisitsList({ visits, facilityTypes }: VisitsListProps) {
                 placeholder="Search facilities or notes..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-slate-800 placeholder-slate-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-slate-800 placeholder-slate-400 focus:ring-2 focus:ring-cascadia-500 focus:border-transparent"
               />
             </div>
           </div>
@@ -147,7 +147,7 @@ export default function VisitsList({ visits, facilityTypes }: VisitsListProps) {
             <select
               value={typeFilter}
               onChange={(e) => setTypeFilter(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-800 focus:ring-2 focus:ring-cascadia-500 focus:border-transparent"
             >
               <option value="">All Types</option>
               {facilityTypes.map(type => (
@@ -163,7 +163,7 @@ export default function VisitsList({ visits, facilityTypes }: VisitsListProps) {
               value={dateFrom}
               onChange={(e) => setDateFrom(e.target.value)}
               placeholder="From date"
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-800 focus:ring-2 focus:ring-cascadia-500 focus:border-transparent"
             />
           </div>
 
@@ -174,7 +174,7 @@ export default function VisitsList({ visits, facilityTypes }: VisitsListProps) {
               value={dateTo}
               onChange={(e) => setDateTo(e.target.value)}
               placeholder="To date"
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-800 focus:ring-2 focus:ring-cascadia-500 focus:border-transparent"
             />
           </div>
         </div>
@@ -186,7 +186,7 @@ export default function VisitsList({ visits, facilityTypes }: VisitsListProps) {
             {hasFilters && (
               <button
                 onClick={clearFilters}
-                className="ml-2 text-blue-600 hover:text-blue-700 font-medium"
+                className="ml-2 text-cascadia-600 hover:text-cascadia-700 font-medium"
               >
                 Clear filters
               </button>
@@ -300,7 +300,7 @@ export default function VisitsList({ visits, facilityTypes }: VisitsListProps) {
           {hasFilters && (
             <button
               onClick={clearFilters}
-              className="mt-4 text-blue-600 hover:text-blue-700 font-medium"
+              className="mt-4 text-cascadia-600 hover:text-cascadia-700 font-medium"
             >
               Clear filters
             </button>

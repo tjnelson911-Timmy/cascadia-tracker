@@ -114,7 +114,7 @@ export default function LoginForm({ users }: LoginFormProps) {
           id="user"
           value={selectedUserId}
           onChange={(e) => setSelectedUserId(e.target.value)}
-          className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-slate-300 bg-white text-slate-800 text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+          className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-slate-300 bg-white text-slate-800 text-base focus:ring-2 focus:ring-cascadia-500 focus:border-transparent transition-all"
           required
         >
           <option value="">Select your name...</option>
@@ -141,7 +141,7 @@ export default function LoginForm({ users }: LoginFormProps) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password"
-            className="w-full px-3 sm:px-4 py-2.5 sm:py-3 pr-12 rounded-lg border border-slate-300 text-slate-800 text-base placeholder-slate-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+            className="w-full px-3 sm:px-4 py-2.5 sm:py-3 pr-12 rounded-lg border border-slate-300 text-slate-800 text-base placeholder-slate-400 focus:ring-2 focus:ring-cascadia-500 focus:border-transparent transition-all"
             required
           />
           <button
@@ -174,7 +174,7 @@ export default function LoginForm({ users }: LoginFormProps) {
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 sm:py-3 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-base"
+        className="w-full bg-cascadia-600 hover:bg-cascadia-700 text-white font-medium py-2.5 sm:py-3 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-base"
       >
         {isLoading ? (
           <span className="flex items-center justify-center gap-2">
