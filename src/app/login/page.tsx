@@ -73,7 +73,7 @@ export default async function LoginPage() {
         <img
           src="/cascadia-large.png"
           alt=""
-          className="w-[400px] sm:w-[600px] md:w-[800px] lg:w-[1000px] opacity-[0.15]"
+          className="w-[400px] sm:w-[600px] md:w-[800px] lg:w-[1000px] opacity-[0.30]"
         />
       </div>
 
