@@ -67,8 +67,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: updateError.message }, { status: 500 })
     }
 
-    // Set must_change_password to true
-    const { error: profileError } = await supabase
+    // Set must_change_password to true (use admin client to bypass RLS)
+    const { error: profileError } = await adminClient
       .from('profiles')
       .update({ must_change_password: true })
       .eq('id', userId)
