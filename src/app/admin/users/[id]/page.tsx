@@ -7,6 +7,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect, notFound } from 'next/navigation'
 import Link from 'next/link'
+import ResetPasswordButton from './reset-password-button'
 
 export default async function UserDetailPage({
   params,
@@ -21,6 +22,17 @@ export default async function UserDetailPage({
 
   if (!user) {
     redirect('/login')
+  }
+
+  // Check if current user is admin
+  const { data: currentProfile } = await supabase
+    .from('profiles')
+    .select('is_admin')
+    .eq('id', user.id)
+    .single()
+
+  if (!currentProfile?.is_admin) {
+    redirect('/dashboard')
   }
 
   // Get the target user's profile
@@ -112,9 +124,12 @@ export default async function UserDetailPage({
       <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         {/* User Header */}
         <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
-          <h2 className="text-2xl font-semibold text-slate-800 mb-4">
-            {targetProfile.full_name}
-          </h2>
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
+            <h2 className="text-2xl font-semibold text-slate-800">
+              {targetProfile.full_name}
+            </h2>
+            <ResetPasswordButton userId={id} userName={targetProfile.full_name} />
+          </div>
 
           {/* Stats Grid */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
