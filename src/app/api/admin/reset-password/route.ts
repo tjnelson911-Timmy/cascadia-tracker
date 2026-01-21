@@ -59,7 +59,7 @@ export async function POST(request: Request) {
 
     const { error: updateError } = await adminClient.auth.admin.updateUserById(
       userId,
-      { password: DEFAULT_PASSWORD }
+      { password: DEFAULT_PASSWORD, email_confirm: true }
     )
 
     if (updateError) {

@@ -2,9 +2,11 @@
  * Create User API Route
  *
  * Creates a new user account. Only accessible to admin users.
+ * Uses admin client to auto-confirm email.
  */
 
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { NextResponse } from 'next/server'
 
 export async function POST(request: Request) {
@@ -49,35 +51,34 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'A user with this name already exists' }, { status: 400 })
     }
 
-    // Create user using signUp (works with anon key)
-    const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+    // Create user using admin client (auto-confirms email)
+    const adminClient = createAdminClient()
+    const { data: createData, error: createError } = await adminClient.auth.admin.createUser({
       email,
       password,
-      options: {
-        data: {
-          full_name: fullName,
-        },
+      email_confirm: true,
+      user_metadata: {
+        full_name: fullName,
       },
     })
 
-    if (signUpError) {
-      console.error('Error creating user:', signUpError)
-      return NextResponse.json({ error: signUpError.message }, { status: 500 })
+    if (createError) {
+      console.error('Error creating user:', createError)
+      return NextResponse.json({ error: createError.message }, { status: 500 })
     }
 
-    if (!signUpData.user) {
+    if (!createData.user) {
       return NextResponse.json({ error: 'Failed to create user' }, { status: 500 })
     }
 
-    // The trigger should auto-create the profile, but let's make sure must_change_password is true
-    // Wait a moment for the trigger to execute
+    // Wait a moment for the trigger to create the profile
     await new Promise(resolve => setTimeout(resolve, 500))
 
     // Update profile to ensure must_change_password is true
     await supabase
       .from('profiles')
       .update({ must_change_password: true })
-      .eq('id', signUpData.user.id)
+      .eq('id', createData.user.id)
 
     return NextResponse.json({
       success: true,
