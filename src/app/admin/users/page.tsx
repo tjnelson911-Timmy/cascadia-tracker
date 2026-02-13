@@ -25,14 +25,13 @@ export default async function AdminUsersPage() {
     .from('facilities')
     .select('*', { count: 'exact', head: true })
 
-  // Get all profiles (exclude admins)
+  // Get all profiles
   const { data: profiles } = await supabase
     .from('profiles')
     .select('id, full_name, is_admin')
     .order('full_name')
 
-  // Filter out admin users from the leaderboard
-  const teamProfiles = (profiles || []).filter(p => !p.is_admin)
+  const teamProfiles = profiles || []
 
   // Get completion counts for each user
   const { data: completions } = await supabase
