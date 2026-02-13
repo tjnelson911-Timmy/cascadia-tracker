@@ -2,7 +2,7 @@
   "name": "Leadership Presence Tracker",
   "short_name": "Cascadia",
   "description": "Leadership isn't about being perfect. It's about being present.",
-  "start_url": "/",
+  "start_url": "/login",
   "scope": "/",
   "display": "standalone",
   "background_color": "#1e3a5f",
