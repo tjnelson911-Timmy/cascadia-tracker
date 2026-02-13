@@ -66,6 +66,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
         <link
           rel="apple-touch-startup-image"
           href="/splash-1170x2532.png"
