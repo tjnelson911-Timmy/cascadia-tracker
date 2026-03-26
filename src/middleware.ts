@@ -42,6 +42,12 @@ export async function middleware(request: NextRequest) {
   // Refresh the session - this keeps users logged in
   await supabase.auth.getUser()
 
+  // Prevent browser from caching HTML pages with stale data
+  supabaseResponse.headers.set(
+    'Cache-Control',
+    'no-cache, no-store, must-revalidate'
+  )
+
   return supabaseResponse
 }
 

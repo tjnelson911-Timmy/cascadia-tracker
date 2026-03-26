@@ -4,10 +4,13 @@
  * View a specific user's visits and progress.
  */
 
+export const dynamic = 'force-dynamic'
+
 import { createClient } from '@/lib/supabase/server'
 import { redirect, notFound } from 'next/navigation'
 import Link from 'next/link'
 import ResetPasswordButton from './reset-password-button'
+import DeleteUserButton from './delete-user-button'
 
 export default async function UserDetailPage({
   params,
@@ -128,7 +131,10 @@ export default async function UserDetailPage({
             <h2 className="text-2xl font-semibold text-slate-800">
               {targetProfile.full_name}
             </h2>
-            <ResetPasswordButton userId={id} userName={targetProfile.full_name} />
+            <div className="flex flex-wrap gap-2">
+              <ResetPasswordButton userId={id} userName={targetProfile.full_name} />
+              <DeleteUserButton userId={id} userName={targetProfile.full_name} />
+            </div>
           </div>
 
           {/* Stats Grid */}

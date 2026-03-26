@@ -116,11 +116,21 @@ export default function DashboardClient({
     })
   }, [timelineVisits, companyFilter, teamFilter, typeFilter])
 
+  // Filter all visits (before slicing) for accurate total count
+  const filteredAllVisits = useMemo(() => {
+    return recentVisits.filter(v => {
+      if (companyFilter && v.facilities?.company !== companyFilter) return false
+      if (teamFilter && v.facilities?.team !== teamFilter) return false
+      if (typeFilter && v.facilities?.type !== typeFilter) return false
+      return true
+    })
+  }, [recentVisits, companyFilter, teamFilter, typeFilter])
+
   // Calculate stats from filtered data
   const stats = useMemo(() => {
     const totalFacilities = filteredFacilities.length
     const visitedFacilities = filteredFacilities.filter(f => f.visited).length
-    const totalVisits = filteredRecentVisits.length // This should be total visits count
+    const totalVisits = filteredAllVisits.length
     const completionPercentage = totalFacilities > 0
       ? Math.round((visitedFacilities / totalFacilities) * 100)
       : 0
@@ -131,7 +141,7 @@ export default function DashboardClient({
       totalVisits,
       completionPercentage,
     }
-  }, [filteredFacilities, filteredRecentVisits])
+  }, [filteredFacilities, filteredAllVisits])
 
   // Calculate chart data from filtered facilities
   const chartData = useMemo(() => {

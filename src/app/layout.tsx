@@ -18,17 +18,17 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  themeColor: "#2563eb",
+  themeColor: "#000000",
 };
 
 export const metadata: Metadata = {
-  title: "Leadership Presence Tracker",
-  description: "Leadership isn't about being perfect. It's about being present.",
+  title: "Cascadia HC Visits",
+  description: "Cascadia HC Visits",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Cascadia",
+    title: "Visits",
   },
   icons: {
     apple: [
@@ -36,24 +36,24 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: "Leadership Presence Tracker",
-    description: "Leadership isn't about being perfect. It's about being present.",
+    title: "Cascadia HC Visits",
+    description: "Cascadia HC Visits",
     url: "https://visits.cascadiahc.com",
-    siteName: "Leadership Presence Tracker",
+    siteName: "Cascadia HC Visits",
     type: "website",
     images: [
       {
         url: "https://visits.cascadiahc.com/icon-512.png",
         width: 512,
         height: 512,
-        alt: "Leadership Presence Tracker Logo",
+        alt: "Cascadia HC Visits",
       },
     ],
   },
   twitter: {
     card: "summary",
-    title: "Leadership Presence Tracker",
-    description: "Leadership isn't about being perfect. It's about being present.",
+    title: "Cascadia HC Visits",
+    description: "Cascadia HC Visits",
     images: ["https://visits.cascadiahc.com/icon-512.png"],
   },
 };
