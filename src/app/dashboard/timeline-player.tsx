@@ -27,6 +27,7 @@ export default function TimelinePlayer({ visits }: TimelinePlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [speed, setSpeed] = useState(1)
+  const [isFullscreen, setIsFullscreen] = useState(false)
 
   const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
 
@@ -128,12 +129,31 @@ export default function TimelinePlayer({ visits }: TimelinePlayerProps) {
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-md overflow-hidden">
-      <div className="px-6 py-4 border-b border-slate-100/50">
+    <div className={`bg-white overflow-hidden transition-all ${
+      isFullscreen
+        ? 'fixed inset-0 z-50 flex flex-col'
+        : 'rounded-2xl shadow-md'
+    }`}>
+      <div className="px-6 py-4 border-b border-slate-100/50 flex items-center justify-between">
         <h3 className="font-semibold text-slate-800">Visit Timeline</h3>
+        <button
+          onClick={() => setIsFullscreen(!isFullscreen)}
+          className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+          title={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
+        >
+          {isFullscreen ? (
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5" />
+            </svg>
+          )}
+        </button>
       </div>
 
-      <div className="h-[250px] sm:h-[300px] md:h-[350px] relative">
+      <div className={`relative ${isFullscreen ? 'flex-1' : 'h-[250px] sm:h-[300px] md:h-[350px]'}`}>
         <Map
           initialViewState={initialViewState}
           style={{ width: '100%', height: '100%' }}
