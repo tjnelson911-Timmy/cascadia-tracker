@@ -35,31 +35,34 @@ export default async function AdminUsersPage() {
 
   const teamProfiles = (profiles || []).filter(p => p.full_name !== 'Admin')
 
-  // Get completion counts for each user
-  const { data: completions } = await supabase
-    .from('facility_completions')
-    .select('user_id')
+  // Get per-user completion and visit counts directly from the database
+  const userStats = await Promise.all(
+    teamProfiles.map(async (profile) => {
+      const { count: facilitiesVisited } = await supabase
+        .from('facility_completions')
+        .select('*', { count: 'exact', head: true })
+        .eq('user_id', profile.id)
 
-  // Get visit counts for each user
-  const { data: visits } = await supabase
-    .from('visits')
-    .select('user_id')
+      const { count: totalVisits } = await supabase
+        .from('visits')
+        .select('*', { count: 'exact', head: true })
+        .eq('user_id', profile.id)
 
-  // Calculate stats for each user (using teamProfiles to exclude admins)
-  const userStats = teamProfiles.map(profile => {
-    const facilitiesVisited = completions?.filter(c => c.user_id === profile.id).length || 0
-    const totalVisits = visits?.filter(v => v.user_id === profile.id).length || 0
-    const completionPercentage = totalFacilities
-      ? Math.round((facilitiesVisited / totalFacilities) * 100)
-      : 0
+      const visited = facilitiesVisited ?? 0
+      const completionPercentage = totalFacilities
+        ? Math.round((visited / totalFacilities) * 100)
+        : 0
 
-    return {
-      ...profile,
-      facilitiesVisited,
-      totalVisits,
-      completionPercentage,
-    }
-  }).sort((a, b) => b.facilitiesVisited - a.facilitiesVisited)
+      return {
+        ...profile,
+        facilitiesVisited: visited,
+        totalVisits: totalVisits ?? 0,
+        completionPercentage,
+      }
+    })
+  )
+
+  userStats.sort((a, b) => b.facilitiesVisited - a.facilitiesVisited)
 
   return (
     <div className="min-h-screen bg-slate-100">

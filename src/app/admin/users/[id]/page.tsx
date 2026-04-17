@@ -68,12 +68,13 @@ export default async function UserDetailPage({
     .eq('user_id', id)
 
   // Get user's recent visits with facility info
-  const { data: recentVisits } = await supabase
+  const { data: recentVisitsRaw } = await supabase
     .from('visits')
     .select(`
       id,
       visit_date,
       note,
+      photo_url,
       facilities (
         facility_name,
         type,
@@ -84,6 +85,20 @@ export default async function UserDetailPage({
     .eq('user_id', id)
     .order('visit_date', { ascending: false })
     .limit(20)
+
+  // Generate signed URLs for photos
+  const recentVisits = await Promise.all(
+    (recentVisitsRaw || []).map(async (visit) => {
+      let signedPhotoUrl: string | null = null
+      if (visit.photo_url) {
+        const { data } = await supabase.storage
+          .from('visit-photos')
+          .createSignedUrl(visit.photo_url, 3600)
+        signedPhotoUrl = data?.signedUrl || null
+      }
+      return { ...visit, signedPhotoUrl }
+    })
+  )
 
   // Get visits by type
   const { data: allVisits } = await supabase
@@ -214,8 +229,21 @@ export default async function UserDetailPage({
                   }
                   return (
                     <li key={visit.id} className="px-6 py-3">
-                      <div className="flex items-center justify-between">
-                        <div>
+                      <div className="flex items-center gap-3">
+                        {visit.signedPhotoUrl ? (
+                          <img
+                            src={visit.signedPhotoUrl}
+                            alt={facility?.facility_name || 'Visit photo'}
+                            className="w-12 h-12 rounded-lg object-cover shrink-0"
+                          />
+                        ) : (
+                          <div className="w-12 h-12 rounded-lg bg-slate-100 flex items-center justify-center shrink-0">
+                            <svg className="w-5 h-5 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                          </div>
+                        )}
+                        <div className="flex-1 min-w-0">
                           <p className="font-medium text-slate-800">
                             {facility?.facility_name}
                           </p>
@@ -224,7 +252,7 @@ export default async function UserDetailPage({
                             {facility?.city && ` • ${facility.city}, ${facility.state}`}
                           </p>
                         </div>
-                        <span className="text-sm text-slate-400">
+                        <span className="text-sm text-slate-400 shrink-0">
                           {new Date(visit.visit_date + 'T00:00:00').toLocaleDateString('en-US', {
                             month: 'short',
                             day: 'numeric',
