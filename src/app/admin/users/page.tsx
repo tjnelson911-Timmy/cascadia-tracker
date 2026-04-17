@@ -33,7 +33,7 @@ export default async function AdminUsersPage() {
     .select('id, full_name, is_admin')
     .order('full_name')
 
-  const teamProfiles = profiles || []
+  const teamProfiles = (profiles || []).filter(p => !p.is_admin)
 
   // Get completion counts for each user
   const { data: completions } = await supabase

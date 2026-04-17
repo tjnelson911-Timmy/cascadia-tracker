@@ -11,6 +11,7 @@ import { redirect, notFound } from 'next/navigation'
 import Link from 'next/link'
 import ResetPasswordButton from './reset-password-button'
 import DeleteUserButton from './delete-user-button'
+import AvatarUpload from './avatar-upload'
 
 export default async function UserDetailPage({
   params,
@@ -41,7 +42,7 @@ export default async function UserDetailPage({
   // Get the target user's profile
   const { data: targetProfile, error } = await supabase
     .from('profiles')
-    .select('id, full_name')
+    .select('id, full_name, avatar_url')
     .eq('id', id)
     .single()
 
@@ -128,9 +129,12 @@ export default async function UserDetailPage({
         {/* User Header */}
         <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
-            <h2 className="text-2xl font-semibold text-slate-800">
-              {targetProfile.full_name}
-            </h2>
+            <div className="flex items-center gap-4">
+              <AvatarUpload userId={id} currentAvatarUrl={targetProfile.avatar_url} />
+              <h2 className="text-2xl font-semibold text-slate-800">
+                {targetProfile.full_name}
+              </h2>
+            </div>
             <div className="flex flex-wrap gap-2">
               <ResetPasswordButton userId={id} userName={targetProfile.full_name} />
               <DeleteUserButton userId={id} userName={targetProfile.full_name} />
