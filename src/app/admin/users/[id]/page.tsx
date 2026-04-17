@@ -12,6 +12,8 @@ import Link from 'next/link'
 import ResetPasswordButton from './reset-password-button'
 import DeleteUserButton from './delete-user-button'
 import AvatarUpload from './avatar-upload'
+import DeleteVisitButton from './delete-visit-button'
+import AddVisitForm from './add-visit-form'
 
 export default async function UserDetailPage({
   params,
@@ -50,10 +52,11 @@ export default async function UserDetailPage({
     notFound()
   }
 
-  // Get total facility count
-  const { count: totalFacilities } = await supabase
+  // Get all facilities (for count and add-visit form)
+  const { data: allFacilities, count: totalFacilities } = await supabase
     .from('facilities')
-    .select('*', { count: 'exact', head: true })
+    .select('id, facility_name, type', { count: 'exact' })
+    .order('facility_name')
 
   // Get user's completion count
   const { count: facilitiesVisited } = await supabase
@@ -195,6 +198,8 @@ export default async function UserDetailPage({
           </div>
         </div>
 
+        <AddVisitForm userId={id} facilities={allFacilities || []} />
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Visits by Type */}
           <div className="bg-white rounded-xl shadow p-6">
@@ -258,6 +263,7 @@ export default async function UserDetailPage({
                             day: 'numeric',
                           })}
                         </span>
+                        <DeleteVisitButton visitId={visit.id} />
                       </div>
                     </li>
                   )
