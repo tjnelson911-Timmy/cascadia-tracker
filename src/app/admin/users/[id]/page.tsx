@@ -14,6 +14,7 @@ import DeleteUserButton from './delete-user-button'
 import AvatarUpload from './avatar-upload'
 import DeleteVisitButton from './delete-visit-button'
 import AddVisitForm from './add-visit-form'
+import FacilityList from './facility-list'
 
 export default async function UserDetailPage({
   params,
@@ -52,17 +53,19 @@ export default async function UserDetailPage({
     notFound()
   }
 
-  // Get all facilities (for count and add-visit form)
+  // Get all facilities (for count, add-visit form, and facility list)
   const { data: allFacilities, count: totalFacilities } = await supabase
     .from('facilities')
-    .select('id, facility_name, type', { count: 'exact' })
+    .select('id, facility_name, type, city, state', { count: 'exact' })
     .order('facility_name')
 
-  // Get user's completion count
-  const { count: facilitiesVisited } = await supabase
+  // Get user's completions (facility IDs)
+  const { data: userCompletions, count: facilitiesVisited } = await supabase
     .from('facility_completions')
-    .select('*', { count: 'exact', head: true })
+    .select('facility_id', { count: 'exact' })
     .eq('user_id', id)
+
+  const visitedFacilityIds = new Set((userCompletions || []).map(c => c.facility_id))
 
   // Get user's total visits
   const { count: totalVisits } = await supabase
@@ -200,82 +203,31 @@ export default async function UserDetailPage({
 
         <AddVisitForm userId={id} facilities={allFacilities || []} />
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Visits by Type */}
-          <div className="bg-white rounded-xl shadow p-6">
-            <h3 className="font-semibold text-slate-800 mb-4">Visits by Type</h3>
-            {visitsByType.length > 0 ? (
-              <div className="space-y-3">
-                {visitsByType.map(({ type, count }) => (
-                  <div key={type} className="flex items-center justify-between">
-                    <span className="text-slate-600">{type}</span>
-                    <span className="font-medium text-slate-800">{count}</span>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p className="text-slate-500 text-sm">No visits yet</p>
-            )}
-          </div>
-
-          {/* Recent Visits */}
-          <div className="lg:col-span-2 bg-white rounded-xl shadow">
-            <div className="px-6 py-4 border-b border-slate-100">
-              <h3 className="font-semibold text-slate-800">Recent Visits</h3>
-            </div>
-            {recentVisits && recentVisits.length > 0 ? (
-              <ul className="divide-y divide-slate-100 max-h-96 overflow-auto">
-                {recentVisits.map((visit) => {
-                  const facility = visit.facilities as unknown as {
-                    facility_name: string
-                    type: string
-                    city: string | null
-                    state: string | null
-                  }
-                  return (
-                    <li key={visit.id} className="px-6 py-3">
-                      <div className="flex items-center gap-3">
-                        {visit.signedPhotoUrl ? (
-                          <img
-                            src={visit.signedPhotoUrl}
-                            alt={facility?.facility_name || 'Visit photo'}
-                            className="w-12 h-12 rounded-lg object-cover shrink-0"
-                          />
-                        ) : (
-                          <div className="w-12 h-12 rounded-lg bg-slate-100 flex items-center justify-center shrink-0">
-                            <svg className="w-5 h-5 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                          </div>
-                        )}
-                        <div className="flex-1 min-w-0">
-                          <p className="font-medium text-slate-800">
-                            {facility?.facility_name}
-                          </p>
-                          <p className="text-sm text-slate-500">
-                            {facility?.type}
-                            {facility?.city && ` • ${facility.city}, ${facility.state}`}
-                          </p>
-                        </div>
-                        <span className="text-sm text-slate-400 shrink-0">
-                          {new Date(visit.visit_date + 'T00:00:00').toLocaleDateString('en-US', {
-                            month: 'short',
-                            day: 'numeric',
-                          })}
-                        </span>
-                        <DeleteVisitButton visitId={visit.id} />
-                      </div>
-                    </li>
-                  )
-                })}
-              </ul>
-            ) : (
-              <div className="px-6 py-8 text-center text-slate-500">
-                No visits recorded yet.
-              </div>
-            )}
-          </div>
-        </div>
+        {/* Facility List with toggle */}
+        <FacilityList
+          facilities={(allFacilities || []).map(f => ({
+            ...f,
+            visited: visitedFacilityIds.has(f.id),
+          }))}
+          recentVisits={recentVisits.map(v => {
+            const facility = v.facilities as unknown as {
+              facility_name: string
+              type: string
+              city: string | null
+              state: string | null
+            }
+            return {
+              id: v.id,
+              visit_date: v.visit_date,
+              signedPhotoUrl: v.signedPhotoUrl,
+              facility_name: facility?.facility_name || '',
+              type: facility?.type || '',
+              city: facility?.city || null,
+              state: facility?.state || null,
+            }
+          })}
+          visitsByType={visitsByType}
+        />
       </main>
     </div>
   )
