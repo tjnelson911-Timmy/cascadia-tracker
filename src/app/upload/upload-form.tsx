@@ -131,7 +131,7 @@ export default function UploadForm({ facilities, userId }: UploadFormProps) {
         .select('id')
         .eq('user_id', userId)
         .eq('facility_id', selectedFacilityId)
-        .single()
+        .maybeSingle()
 
       // If no existing completion, create one
       if (!existingCompletion) {

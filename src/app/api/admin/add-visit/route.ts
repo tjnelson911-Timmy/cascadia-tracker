@@ -1,10 +1,12 @@
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { NextResponse } from 'next/server'
 
 export async function POST(request: Request) {
   try {
     const supabase = await createClient()
 
+    // Verify the caller is an authenticated admin
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) {
       return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
@@ -19,6 +21,9 @@ export async function POST(request: Request) {
     if (!adminProfile?.is_admin) {
       return NextResponse.json({ error: 'Not authorized' }, { status: 403 })
     }
+
+    // Use admin client for inserts (bypasses RLS so admin can add visits for other users)
+    const adminClient = createAdminClient()
 
     const formData = await request.formData()
     const userId = formData.get('userId') as string
@@ -37,7 +42,7 @@ export async function POST(request: Request) {
     if (photo && photo.size > 0) {
       const ext = photo.name.split('.').pop()
       const fileName = `${userId}/${Date.now()}.${ext}`
-      const { error: uploadError } = await supabase.storage
+      const { error: uploadError } = await adminClient.storage
         .from('visit-photos')
         .upload(fileName, photo)
 
@@ -48,7 +53,7 @@ export async function POST(request: Request) {
     }
 
     // Create visit record
-    const { data: visit, error: visitError } = await supabase
+    const { data: visit, error: visitError } = await adminClient
       .from('visits')
       .insert({
         user_id: userId,
@@ -64,16 +69,16 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: visitError.message }, { status: 500 })
     }
 
-    // Check if first visit to this facility
-    const { data: existingCompletion } = await supabase
+    // Check if first visit to this facility — create completion if not
+    const { data: existingCompletion } = await adminClient
       .from('facility_completions')
       .select('id')
       .eq('user_id', userId)
       .eq('facility_id', facilityId)
-      .single()
+      .maybeSingle()
 
     if (!existingCompletion) {
-      await supabase
+      await adminClient
         .from('facility_completions')
         .insert({
           user_id: userId,
