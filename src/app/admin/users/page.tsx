@@ -53,16 +53,43 @@ export default async function AdminUsersPage() {
         ? Math.round((visited / totalFacilities) * 100)
         : 0
 
+      // For finishers, find the timestamp of their final completion (the moment they hit 100%)
+      let finishedAt: string | null = null
+      if (totalFacilities && visited >= totalFacilities) {
+        const { data: lastCompletion } = await supabase
+          .from('facility_completions')
+          .select('completed_at')
+          .eq('user_id', profile.id)
+          .order('completed_at', { ascending: false })
+          .limit(1)
+          .single()
+        finishedAt = lastCompletion?.completed_at ?? null
+      }
+
       return {
         ...profile,
         facilitiesVisited: visited,
         totalVisits: totalVisits ?? 0,
         completionPercentage,
+        finishedAt,
       }
     })
   )
 
-  userStats.sort((a, b) => b.facilitiesVisited - a.facilitiesVisited)
+  // Finishers first, ordered by when they finished. Everyone else by facilities visited.
+  userStats.sort((a, b) => {
+    if (a.finishedAt && b.finishedAt) return a.finishedAt.localeCompare(b.finishedAt)
+    if (a.finishedAt) return -1
+    if (b.finishedAt) return 1
+    return b.facilitiesVisited - a.facilitiesVisited
+  })
+
+  const finishers = userStats.filter(u => u.finishedAt)
+  const placeLabel = (n: number) => {
+    const s = ['th', 'st', 'nd', 'rd']
+    const v = n % 100
+    return n + (s[(v - 20) % 10] || s[v] || s[0])
+  }
 
   return (
     <div className="min-h-screen bg-slate-100">
@@ -122,6 +149,40 @@ export default async function AdminUsersPage() {
           </p>
         </div>
 
+        {/* Congratulations Banner */}
+        {finishers.length > 0 && (
+          <div className="mb-6 bg-gradient-to-br from-amber-50 via-yellow-50 to-amber-100 border-2 border-amber-300 rounded-2xl shadow-lg overflow-hidden">
+            <div className="px-6 py-6 sm:px-8 sm:py-8 text-center">
+              <p className="text-5xl sm:text-6xl mb-2">🎉</p>
+              <h3 className="text-3xl sm:text-4xl font-extrabold text-amber-700 tracking-tight">
+                Congratulations!
+              </h3>
+              <p className="text-amber-700/80 mt-1">
+                {finishers.length === 1 ? 'A team member has' : `${finishers.length} team members have`} visited every facility!
+              </p>
+              <div className="mt-5 flex flex-wrap justify-center gap-3">
+                {finishers.map((f, i) => {
+                  const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '🏅'
+                  return (
+                    <div
+                      key={f.id}
+                      className="bg-white/80 backdrop-blur rounded-xl px-4 py-3 shadow-sm border border-amber-200 flex items-center gap-3"
+                    >
+                      <span className="text-3xl">{medal}</span>
+                      <div className="text-left">
+                        <p className="text-xs font-semibold uppercase tracking-wide text-amber-700">
+                          {placeLabel(i + 1)} Place
+                        </p>
+                        <p className="font-bold text-slate-800">{f.full_name}</p>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Leaderboard */}
         <div className="bg-white rounded-2xl shadow-md overflow-hidden">
           <div className="px-6 py-4 border-b border-slate-100/50 flex items-center gap-3">
@@ -134,7 +195,12 @@ export default async function AdminUsersPage() {
           </div>
 
           <div className="divide-y divide-slate-100/50">
-            {userStats.map((userStat, index) => (
+            {userStats.map((userStat, index) => {
+              const finishPlace = userStat.finishedAt
+                ? finishers.findIndex(f => f.id === userStat.id) + 1
+                : 0
+              const medal = finishPlace === 1 ? '🥇' : finishPlace === 2 ? '🥈' : finishPlace === 3 ? '🥉' : finishPlace > 0 ? '🏅' : null
+              return (
               <Link
                 key={userStat.id}
                 href={`/admin/users/${userStat.id}`}
@@ -142,19 +208,30 @@ export default async function AdminUsersPage() {
               >
                 <div className="flex items-center gap-4">
                   {/* Rank */}
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm ${
-                    index === 0 ? 'bg-gradient-to-br from-yellow-400 to-amber-500 text-white shadow-md' :
-                    index === 1 ? 'bg-gradient-to-br from-slate-300 to-slate-400 text-white shadow-md' :
-                    index === 2 ? 'bg-gradient-to-br from-amber-500 to-orange-500 text-white shadow-md' :
-                    'bg-slate-100 text-slate-500'
-                  }`}>
-                    {index + 1}
-                  </div>
+                  {medal ? (
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center text-2xl bg-gradient-to-br from-amber-50 to-yellow-100 shadow-md border border-amber-200">
+                      {medal}
+                    </div>
+                  ) : (
+                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm ${
+                      index === 0 ? 'bg-gradient-to-br from-yellow-400 to-amber-500 text-white shadow-md' :
+                      index === 1 ? 'bg-gradient-to-br from-slate-300 to-slate-400 text-white shadow-md' :
+                      index === 2 ? 'bg-gradient-to-br from-amber-500 to-orange-500 text-white shadow-md' :
+                      'bg-slate-100 text-slate-500'
+                    }`}>
+                      {index + 1}
+                    </div>
+                  )}
 
                   {/* Name */}
                   <div className="flex-1">
-                    <p className="font-medium text-slate-800">
+                    <p className="font-medium text-slate-800 flex items-center gap-2">
                       {userStat.full_name}
+                      {finishPlace > 0 && (
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-200">
+                          {placeLabel(finishPlace)} Place
+                        </span>
+                      )}
                     </p>
                     <p className="text-sm text-slate-500">
                       {userStat.totalVisits} total visit{userStat.totalVisits !== 1 ? 's' : ''}
@@ -197,7 +274,8 @@ export default async function AdminUsersPage() {
                   </svg>
                 </div>
               </Link>
-            ))}
+              )
+            })}
           </div>
         </div>
       </main>
